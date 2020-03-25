@@ -1,1 +1,29 @@
-<h1>CMS works</h1>
+<div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <div class="navbar-header">
+                    <a class="navbar-brand" routerLink="/">CMS BLOG</a>
+                </div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="/posts">All Posts</a></li>
+                    <li class="nav-item" routerLinkActive="active" *ngIf="adminLoggedIn"><a class="nav-link" routerLink="/admin">Admin Dashboard</a></li>
+                </ul>
+            </div>
+    
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">  
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="/register">Sign Up</a></li>
+                    <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="/login">Login</a></li>
+                </ul>
+                <button class="btn btn-light" *ngIf="isLoggedIn">Logout</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+
+
