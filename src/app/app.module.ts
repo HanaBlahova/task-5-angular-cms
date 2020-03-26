@@ -13,6 +13,7 @@ import { CategoriesComponent } from './admin/categories/categories.component';
 import { UsersComponent } from './admin/users/users.component';
 import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
 import { PostEditComponent } from './admin/post-edit/post-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PostEditComponent } from './admin/post-edit/post-edit.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule, 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
