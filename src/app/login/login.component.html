@@ -4,11 +4,14 @@
         <div class="form-group">
             <label for="email">E-mail adress</label>
             <input type="email" class="form-control" id="email" formControlName="email" placeholder="E-mail">
+            <span class="note" *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">E-mail is required.</span>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+            <span class="note" *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">Password is required.</span>
         </div>
         <button type="submit" class="btn btn-dark" [disabled]="!loginForm.valid">Log in</button>
+        <div class="note" *ngIf="!loginForm.valid && loginForm.touched">Your e-mail or password is invalid.</div>
     </form>
 </div>

@@ -4,15 +4,19 @@
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
+            <span class="note" *ngIf="!registerForm.get('name').valid && registerForm.get('name').touched">Name is required.</span>
         </div>
         <div class="form-group">
             <label for="email">E-mail adress</label>
             <input type="email" class="form-control" id="email" formControlName="email" placeholder="E-mail">
+            <span class="note" *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">E-mail is required.</span>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+            <span class="note" *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">Password is required.</span>
         </div>
-        <button type="submit" class="btn btn-dark">Register</button>
+        <button type="submit" class="btn btn-dark" [disabled]="!registerForm.valid">Register</button>
+        <div class="note" *ngIf="!registerForm.valid && registerForm.touched">Register form is invalid.</div>
     </form>
 </div>

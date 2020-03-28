@@ -2,8 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { TestBed } from '@angular/core/testing';
+
 export const environment = {
-  production: false
+  production: false,
+  adminUser: {
+    email: 'test@test.com',
+    password: 'test1234'
+  }
 };
 
 /*
@@ -14,3 +20,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+

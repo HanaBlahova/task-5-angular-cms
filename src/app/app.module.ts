@@ -14,6 +14,8 @@ import { UsersComponent } from './admin/users/users.component';
 import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
 import { PostEditComponent } from './admin/post-edit/post-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CategoriesComponent,
     UsersComponent,
     AdminPostsComponent,
-    PostEditComponent
+    PostEditComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
