@@ -9,6 +9,9 @@ export const environment = {
   adminUser: {
     email: 'test@test.com',
     password: 'test1234'
+  },
+  api: {
+    url: 'http://localhost:8080'
   }
 };
 
