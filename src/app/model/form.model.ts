@@ -1,9 +1,9 @@
 export interface LoginForm {
-    email: string,
+    email: string;
     password: string
 }
 
 export interface RegisterForm {
-    email: string,
+    email: string;
     password: string
 }

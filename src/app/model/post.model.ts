@@ -2,16 +2,16 @@ import { User } from './user.model';
 import { Category } from './category.model';
 
 export interface PostForm {
-    title: string,
-    content: string,
+    title: string;
+    content: string;
     categories: string[]
 }
 
 export interface Post {
-    _id: string,
-    title: string,
-    perex: string,
-    content: string,
-    author: User,
+    _id: string;
+    title: string;
+    perex: string;
+    content: string;
+    author: User;
     categories: Category[]
 }

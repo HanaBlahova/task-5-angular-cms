@@ -11,7 +11,7 @@ export const environment = {
     password: 'test1234'
   },
   api: {
-    url: 'http://localhost:8080'
+    url: 'http://localhost:8080/api/v1'
   }
 };
 
