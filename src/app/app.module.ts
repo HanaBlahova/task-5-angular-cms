@@ -37,7 +37,7 @@ import { EditPostsComponent } from './admin/admin-posts/edit-posts/edit-posts.co
     AdminUsersComponent,
     EditUsersComponent,
     EditCategoriesComponent,
-    EditPostsComponent
+    EditPostsComponent,
   ],
   imports: [
     BrowserModule,

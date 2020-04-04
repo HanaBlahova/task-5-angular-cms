@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PostsDataService } from 'src/app/service/posts-data.service';
+import { Post } from 'src/app/model/post.model';
 
 @Component({
   selector: 'app-post',
@@ -7,6 +8,8 @@ import { PostsDataService } from 'src/app/service/posts-data.service';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+
+  @Input('post') post: Post;
 
   constructor(private postsDataService: PostsDataService) { }
 
