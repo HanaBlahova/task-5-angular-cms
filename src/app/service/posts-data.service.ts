@@ -16,4 +16,20 @@ export class PostsDataService {
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.url}/posts`);
   }
+
+  getPost(slug: string): Observable<Post> {
+    return this.http.get<Post>(`${this.url}/posts/${slug}`);
+  }
+
+  createPost(postData: Post) {
+    return this.http.post(`${this.url}/posts`, postData), {observe: 'response'};
+  }
+
+  updatePost(postId: string, putData: Post) {
+    return this.http.put(`${this.url}/posts/${postId}`, putData, {observe: 'response'});
+  }
+
+  deletePost(postId: string) {
+    return this.http.delete(`${this.url}/posts/${postId}`, {observe: 'response'});
+  }
 }

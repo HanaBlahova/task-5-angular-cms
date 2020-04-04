@@ -1,1 +1,22 @@
-<p>admin works!</p>
+<div class="admin-menu"> 
+    <nav class="navbar navbar-expand-md">
+        <div class="container">
+            <ul class="nav nav-pills">
+                <li class="nav-item" >
+                  <a class="nav-link" routerLinkActive="active bg-dark" [routerLinkActiveOptions]="{exact: true}" data-toggle="pill" routerLink="/admin">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active bg-dark" data-toggle="pill" routerLink="/admin/categories">Categories</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active bg-dark" data-toggle="pill" routerLink="/admin/posts">Posts</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" routerLinkActive="active bg-dark" data-toggle="pill" routerLink="/admin/users">Users</a>
+                </li>
+            </ul>  
+        </div>
+    </nav>
+</div>
+<router-outlet></router-outlet>
+

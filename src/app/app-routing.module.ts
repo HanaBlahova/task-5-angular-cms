@@ -17,7 +17,7 @@ import { EditPostsComponent } from './admin/admin-posts/edit-posts/edit-posts.co
 const routes: Routes = [
   {path: '', component: GridComponent, pathMatch: 'full'},
   {path: 'archive', component: PostsComponent },
-  {path: ':slug', component: PostComponent},
+  {path: 'archive:slug', component: PostComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'admin', component: AdminComponent, children: [
