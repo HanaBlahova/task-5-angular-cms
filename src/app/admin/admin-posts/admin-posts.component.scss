@@ -1,0 +1,30 @@
+.admin-posts {
+}
+
+    .header {
+        padding: 30px;
+    }
+
+    .post {
+        padding: 25px;
+        border-bottom: 1px solid #6c757d60 ;
+    }
+
+
+        .image {
+            width: 160px;
+            height: 100px;
+        }
+
+        .title {
+            font-weight: 600;
+            padding-bottom: 5px;
+        }   
+        
+        a {
+            color: #212529; 
+        }
+        
+            a:hover {
+                color: #6c757d;
+            }

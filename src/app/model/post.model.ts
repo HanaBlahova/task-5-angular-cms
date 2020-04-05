@@ -12,6 +12,8 @@ export interface Post {
     title: string;
     perex: string;
     content: string;
+    image: string;
+    slug: string;
     author: User;
     categories: Category[]
 }

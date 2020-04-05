@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
+  // postsNumber: number = 7;
+  // categoriesNumber: number = 2;
+  // usersNumber:number = 5 ;
+
   constructor() { }
 
   ngOnInit(): void {
+
+
+    
   }
 
 }

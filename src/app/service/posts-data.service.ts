@@ -18,6 +18,7 @@ export class PostsDataService {
   }
 
   getPost(slug: string): Observable<Post> {
+    console.log(slug);
     return this.http.get<Post>(`${this.url}/posts/${slug}`);
   }
 
