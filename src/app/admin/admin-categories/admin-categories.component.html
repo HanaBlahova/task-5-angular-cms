@@ -1,4 +1,21 @@
 <div class="container">
-    <p>admin-categories works!</p>
+    <div class="row header">
+        <div class="col-md-3">
+            <h3>List of categories</h3>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-success" routerLink="/admin/categories/create">New Category</button>
+        </div>
+    </div>
+    <div class="category row" *ngFor="let category of categories">
+         <div class="col-md-7">
+              <div class="name">{{category.name}}</div>
+        </div>
+         <div class="col-md-2">
+             <button class="btn btn-primary" (click)="onUpdateCategory()">Upd</button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-danger" (click)="onDeleteCategory()">Del</button>
+        </div>    
+    </div>
 </div>
-<router-outlet></router-outlet>

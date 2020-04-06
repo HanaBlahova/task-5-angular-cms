@@ -1,4 +1,4 @@
-<div class="container admin-posts">
+<div class="container">
     <div class="row header">
         <div class="col-md-10">
             <h3>List of posts</h3>
@@ -15,7 +15,6 @@
           <div class="title"><a routerLink="/archive/{{post.slug}}">{{post.title}}</a></div>
           <div>{{ post.perex }}</div>
       </div>
-      <hr>
       <div class="col-md-1">
           <button class="btn btn-primary" (click)="onUpdatePost()">Upd</button>
       </div>
@@ -24,5 +23,3 @@
       </div>
     </div>
 </div>
-
-<router-outlet></router-outlet>

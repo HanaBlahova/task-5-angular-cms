@@ -1,1 +1,20 @@
-<p>edit-users works!</p>
+<div class="entityForm">
+    <form [formGroup]="userForm" (ngSubmit)="onUserSubmit()">
+        <h3>Edit user</h3>
+        <div class="form-group row">
+            <label for="email" class="col-md-2">E-mail</label>
+            <input type="email" class="form-control col-md-10" formControlName="email" id="email" placeholder="E-mail">
+        </div>
+
+        <div class="form-group row">
+            <label for="password" class="col-md-2">Password</label>
+            <input type="password" class="form-control col-md-10" formControlName="password" id="password" placeholder="Password">
+        </div>
+        <div class="row">
+            <div class="note2 col-md-10">
+                <span *ngIf="!userForm.valid && userForm.touched">Invalid form!</span>
+            </div>
+            <button type="submit" class="btn btn-success col-md-2" [disabled]="!userForm.valid">Save User</button>
+        </div>
+    </form>
+</div>

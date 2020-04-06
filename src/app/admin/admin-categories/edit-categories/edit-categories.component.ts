@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesDataService } from 'src/app/service/categories-data.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-categories',
@@ -8,9 +9,19 @@ import { CategoriesDataService } from 'src/app/service/categories-data.service';
 })
 export class EditCategoriesComponent implements OnInit {
 
+  categoryForm: FormGroup;
+
   constructor(private categoriesDataService: CategoriesDataService) { }
 
   ngOnInit(): void {
+
+    this.categoryForm = new FormGroup({
+      'name': new FormControl(null, Validators.required)
+    });
+  }
+
+  onCategorySubmit() {
+
   }
 
 }

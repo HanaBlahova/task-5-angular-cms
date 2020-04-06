@@ -19,6 +19,7 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { EditUsersComponent } from './admin/admin-users/edit-users/edit-users.component';
 import { EditCategoriesComponent } from './admin/admin-categories/edit-categories/edit-categories.component';
 import { EditPostsComponent } from './admin/admin-posts/edit-posts/edit-posts.component';
+import { CategoryMenuComponent } from './layout/category-menu/category-menu.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { EditPostsComponent } from './admin/admin-posts/edit-posts/edit-posts.co
     EditUsersComponent,
     EditCategoriesComponent,
     EditPostsComponent,
+    CategoryMenuComponent,
   ],
   imports: [
     BrowserModule,

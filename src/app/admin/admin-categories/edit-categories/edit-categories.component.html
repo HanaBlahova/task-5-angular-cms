@@ -1,1 +1,15 @@
-<p>edit-categories works!</p>
+<div class="entityForm">
+    <form [formGroup]="categoryForm" (ngSubmit)="onCategorySubmit()">
+        <h3>Create category</h3>
+        <div class="form-group row">
+            <label for="name" class="col-md-2">Name</label>
+            <input type="text" class="form-control col-md-10" formControlName="name" id="title" placeholder="Name of category">
+        </div>
+        <div class="row">
+            <div class="note2 col-md-10">
+                <span *ngIf="!categoryForm.valid && categoryForm.touched">Invalid form!</span>
+            </div>
+            <button type="submit" class="btn btn-success col-md-2" [disabled]="!categoryForm.valid">Save Category</button>
+        </div>
+    </form>
+</div>

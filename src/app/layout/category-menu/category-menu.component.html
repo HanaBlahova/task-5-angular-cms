@@ -1,0 +1,14 @@
+<div class="categories-menu"> 
+    <nav class="navbar navbar-expand-md">
+        <ul class="nav nav-pills">
+            <li class="nav-item" >
+                <a class="nav-link" routerLinkActive="active bg-dark" [routerLinkActiveOptions]="{exact: true}" data-toggle="pill" routerLink="/archive">All</a>
+            </li>
+            <div *ngFor="let category of categories">
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active bg-dark" data-toggle="pill" routerLink="/admin/categories">{{category.name}}</a>
+                </li>
+            </div>
+        </ul>  
+    </nav>
+</div>
