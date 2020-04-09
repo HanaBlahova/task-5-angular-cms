@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category } from '../model/category.model';
+import { Category, CategoryForm } from '../model/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class CategoriesDataService {
     return this.http.get<Category>(`${this.url}/categories/${categoryId}`);  
   }
 
-  createCategory(postData: Category) {
+  createCategory(postData: CategoryForm) {
     return this.http.post(`${this.url}/categories`, postData, {observe: 'response'}); 
   }
 

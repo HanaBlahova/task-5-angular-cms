@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { CategoriesDataService } from 'src/app/service/categories-data.service';
 import { Category } from 'src/app/model/category.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-categories',
@@ -10,20 +11,20 @@ import { Category } from 'src/app/model/category.model';
 export class AdminCategoriesComponent implements OnInit {
 
   categories: Category[];
+
   
-  constructor(private categoriesDataService: CategoriesDataService) { }
+  constructor(
+    private categoriesDataService: CategoriesDataService
+    ) { }
 
   ngOnInit(): void {
 
     this.categoriesDataService.getCategories().subscribe((data: Category[]) => this.categories = data);
   }
 
-  onUpdateCategory() {
-
-  };
 
   onDeleteCategory() {
-
+    
   };
 
 }

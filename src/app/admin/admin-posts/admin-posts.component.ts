@@ -28,11 +28,6 @@ export class AdminPostsComponent implements OnInit {
 
   }
 
-  onUpdatePost() {
-    this.router.navigate(['admin/posts/id']);
-  }
-
-
   onDeletePost() {
 
   }

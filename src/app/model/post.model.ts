@@ -3,8 +3,10 @@ import { Category } from './category.model';
 
 export interface PostForm {
     title: string;
+    perex: string;
     content: string;
-    categories: string[]
+    categories?: string[];
+    image: string
 }
 
 export interface Post {
@@ -14,6 +16,6 @@ export interface Post {
     content: string;
     image: string;
     slug: string;
-    author: User;
-    categories: Category[]
+    author?: User;
+    categories?: Category[]
 }

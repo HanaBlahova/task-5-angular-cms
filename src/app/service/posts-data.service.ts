@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Post } from '../model/post.model';
+import { Post, PostForm } from '../model/post.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -18,12 +18,11 @@ export class PostsDataService {
   }
 
   getPost(slug: string): Observable<Post> {
-    console.log(slug);
     return this.http.get<Post>(`${this.url}/posts/${slug}`);
   }
 
-  createPost(postData: Post) {
-    return this.http.post(`${this.url}/posts`, postData), {observe: 'response'};
+  createPost(postData: PostForm) {
+    return this.http.post(`${this.url}/posts`, postData, {observe: 'response'});
   }
 
   updatePost(postId: string, putData: Post) {

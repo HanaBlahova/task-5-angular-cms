@@ -12,7 +12,7 @@
               <div class="name">{{category.name}}</div>
         </div>
          <div class="col-md-2">
-             <button class="btn btn-primary" (click)="onUpdateCategory()">Upd</button>
+             <button class="btn btn-primary" routerLink="/admin/categories/edit/{{category._id}}">Upd</button>
         </div>
         <div class="col-md-2">
             <button class="btn btn-danger" (click)="onDeleteCategory()">Del</button>

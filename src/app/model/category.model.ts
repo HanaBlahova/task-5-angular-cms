@@ -1,5 +1,5 @@
 export interface CategoryForm {
-    name: string
+    name: string;
 }
 
 export interface Category {

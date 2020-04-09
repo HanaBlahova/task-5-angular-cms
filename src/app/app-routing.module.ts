@@ -22,15 +22,15 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'admin', component: AdminComponent, children: [
     {path: 'categories', component: AdminCategoriesComponent},
-    {path: 'categories/id', component: EditCategoriesComponent},
+    {path: 'categories/edit/:id', component: EditCategoriesComponent},
     {path: 'categories/create', component: EditCategoriesComponent},
 
     {path: 'users', component: AdminUsersComponent},
-    {path: 'users/id', component: EditUsersComponent},
+    {path: 'users/edit/:id', component: EditUsersComponent},
     {path: 'users/create', component: EditUsersComponent},
 
     {path: 'posts', component: AdminPostsComponent},
-    {path: 'posts/id', component: EditPostsComponent},
+    {path: 'posts/edit/:slug', component: EditPostsComponent},
     {path: 'posts/create', component: EditPostsComponent},
   ]},
   {path: '**', redirectTo: '/'}
