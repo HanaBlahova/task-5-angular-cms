@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginForm } from '../../model/form.model';
+import { AuthService } from 'src/app/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,10 @@ export class LoginComponent implements OnInit {
     password: ''
   } 
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
 
   ngOnInit(): void {
@@ -26,13 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit() {
-    this.updateData();
-    console.log(this.logFormData);
-  }
-
-  updateData() {
     this.logFormData.email = this.loginForm.get('email').value;
     this.logFormData.password = this.loginForm.get('password').value;
+
+    this.authService.loginUser(this.logFormData).subscribe(res => this.router.navigate(['/archive']));
   }
+
+
 
 }

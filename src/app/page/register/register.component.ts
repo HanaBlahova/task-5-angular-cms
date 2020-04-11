@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterForm } from '../../model/form.model';
+import { AuthService } from 'src/app/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +18,10 @@ export class RegisterComponent implements OnInit {
     password: ''
   } 
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -27,14 +32,13 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegisterSubmit() {
-    this.updateData();
-    console.log(this.regFormData);
-  }
-
-  updateData() {
+    
     //this.regFormData.name = this.registerForm.get('name').value;
     this.regFormData.email = this.registerForm.get('email').value;
     this.regFormData.password = this.registerForm.get('password').value;
+
+    this.authService.registerUser(this.regFormData).subscribe(res => this.router.navigate(['/archive']));
   }
+
 
 }

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row header">
-        <div class="col-md-3">
+        <div class="col-md-10">
             <h3>List of categories</h3>
         </div>
         <div class="col-md-2">
@@ -8,13 +8,13 @@
         </div>
     </div>
     <div class="category row" *ngFor="let category of categories">
-         <div class="col-md-7">
+         <div class="col-md-10">
               <div class="name">{{category.name}}</div>
         </div>
-         <div class="col-md-2">
+         <div class="col-md-1">
              <button class="btn btn-primary" routerLink="/admin/categories/edit/{{category._id}}">Upd</button>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
             <button class="btn btn-danger" (click)="onDeleteCategory()">Del</button>
         </div>    
     </div>

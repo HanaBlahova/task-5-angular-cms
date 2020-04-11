@@ -12,15 +12,21 @@ import { EditUsersComponent } from './admin/admin-users/edit-users/edit-users.co
 import { EditPostsComponent } from './admin/admin-posts/edit-posts/edit-posts.component';
 import { PostDetailComponent } from './page/posts/post-detail/post-detail.component';
 import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
+import { AdminGuard } from './auth/admin.guard';
+import { LoginGuard } from './auth/login.guard';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 
 const routes: Routes = [
   {path: '', component: GridComponent, pathMatch: 'full'},
   {path: 'archive', component: PostsComponent },
   {path: 'archive/:slug', component: PostDetailComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'admin', component: AdminComponent, children: [
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
+  {path: 'register', component: RegisterComponent, canActivate: [LoginGuard]},
+  {path: 'admin', redirectTo: '/admin/home', pathMatch: 'full'},
+  {path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
+    {path: 'home', component: AdminHomeComponent},
+
     {path: 'categories', component: AdminCategoriesComponent},
     {path: 'categories/edit/:id', component: EditCategoriesComponent},
     {path: 'categories/create', component: EditCategoriesComponent},

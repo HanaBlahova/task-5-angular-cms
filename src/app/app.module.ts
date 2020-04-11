@@ -13,13 +13,16 @@ import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { EditUsersComponent } from './admin/admin-users/edit-users/edit-users.component';
 import { EditCategoriesComponent } from './admin/admin-categories/edit-categories/edit-categories.component';
 import { EditPostsComponent } from './admin/admin-posts/edit-posts/edit-posts.component';
 import { CategoryMenuComponent } from './layout/category-menu/category-menu.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { CookieService } from 'ngx-cookie-service';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 
 @NgModule({
@@ -40,6 +43,7 @@ import { CategoryMenuComponent } from './layout/category-menu/category-menu.comp
     EditCategoriesComponent,
     EditPostsComponent,
     CategoryMenuComponent,
+    AdminHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,14 @@ import { CategoryMenuComponent } from './layout/category-menu/category-menu.comp
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

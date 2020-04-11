@@ -6,5 +6,5 @@ export interface UserForm {
 export interface User {
     _id: string;
     email: string;
-    roles: string[]
+    roles?: string[]
 }

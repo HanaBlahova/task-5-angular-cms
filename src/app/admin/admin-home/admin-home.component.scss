@@ -1,0 +1,22 @@
+.container {
+    max-width: 800px;
+}
+
+.dashboard {
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+    .statistics {
+        background-color: #79838b33;
+        border-radius: 10px;
+        max-width: 140px;
+        padding: 15px 5px;
+    }
+
+    .statistics div {
+        padding: 5px;
+    }

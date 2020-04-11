@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../model/user.model';
+import { UsersPageable } from '../model/pageable.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class UsersDataService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/users`);
+  getUsers(): Observable<UsersPageable> {
+    return this.http.get<UsersPageable>(`${this.url}/users`);
   }
 
   getUser(userId: string): Observable<User> {

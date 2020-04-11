@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row header">
-        <div class="col-md-3">
+        <div class="col-md-10">
             <h3>List of users</h3>
         </div>
         <div class="col-md-2">
@@ -8,16 +8,16 @@
         </div>
     </div>
     <div class="user row" *ngFor="let user of users">
-         <div class="col-md-4">
+         <div class="col-md-7">
               <div class="email">{{user.email}}</div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="role">{{user.roles}}</div>
       </div>
-         <div class="col-md-2">
+         <div class="col-md-1">
              <button class="btn btn-primary" routerLink="/admin/users/edit/{{user._id}}">Upd</button>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
             <button class="btn btn-danger" (click)="onDeleteUser()">Del</button>
         </div>    
     </div>

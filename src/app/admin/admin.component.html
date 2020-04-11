@@ -3,13 +3,13 @@
         <nav class="navbar navbar-expand-md">
             <ul class="nav nav-pills">
                 <li class="nav-item" >
-                    <a class="nav-link" routerLinkActive="active bg-dark" [routerLinkActiveOptions]="{exact: true}" data-toggle="pill" routerLink="/admin">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active bg-dark" data-toggle="pill" routerLink="/admin/categories">Categories</a>
+                    <a class="nav-link" routerLinkActive="active bg-dark" [routerLinkActiveOptions]="{exact: true}" data-toggle="pill" routerLink="/admin/home">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLinkActive="active bg-dark" data-toggle="pill" routerLink="/admin/posts">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active bg-dark" data-toggle="pill" routerLink="/admin/categories">Categories</a>
                 </li>
                 <li class="nav-item" >
                     <a class="nav-link" routerLinkActive="active bg-dark" data-toggle="pill" routerLink="/admin/users">Users</a>
@@ -17,25 +17,5 @@
             </ul>  
         </nav>
     </div>
-    <!-- <div class="dashboard row">
-        <div class="col-md-4">
-            <div class="statistics">
-                <div>POSTS</div>
-                <div>{{postsNumber}}</div>
-            </div>
-       </div>
-       <div class="col-md-4">
-           <div class="statistics">
-                <div>CATEGORIES</div>
-                <div>{{categoriesNumber}}</div>
-           </div>
-      </div>
-      <div class="col-md-4">
-          <div class="statistics">
-            <div>USERS</div>
-            <div>{{usersNumber}}</div>
-          </div>
-       </div>
-    </div>
-</div> -->
+  
 <router-outlet></router-outlet>
