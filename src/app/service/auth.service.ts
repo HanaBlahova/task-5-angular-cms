@@ -34,10 +34,15 @@ export class AuthService {
   registerUser(postData: RegisterForm) {
     return this.http.post(`${this.url}/auth/sign-up`, postData).pipe(
       map((response: any) => {
+        console.log(response);
         if(response.token) {
           this.user$.next(JWT(response.token));
           this.cookieService.set('token', response.token);
           this.isLoggedIn$.next(true);
+        } else if (response.message === 'Duplicate email.') {
+          alert('Duplicated email.');
+        } else {
+          alert('Register failed.');
         }
       })
     )

@@ -3,19 +3,22 @@
         <div class="col-md-4">
             <div class="statistics">
                 <div>POSTS</div>
-                <div>{{(postsArr.length)}}</div>
+                <div *ngIf="postsArr === undefined">...</div>
+                <div *ngIf="postsArr !== undefined">{{postsArr.length}}</div>
             </div>
        </div>
        <div class="col-md-4">
            <div class="statistics">
                 <div>CATEGORIES</div>
-                <div>{{categoriesArr.length}}</div>
+                <div *ngIf="categoriesArr === undefined">...</div>
+                <div *ngIf="categoriesArr !== undefined">{{categoriesArr.length}}</div>
            </div>
       </div>
       <div class="col-md-4">
           <div class="statistics">
             <div>USERS</div>
-            <div>{{usersArr.length}}</div>
+            <div *ngIf="usersArr === undefined">...</div>
+            <div *ngIf="usersArr !== undefined">{{usersArr.length}}</div>
           </div>
        </div>
     </div>

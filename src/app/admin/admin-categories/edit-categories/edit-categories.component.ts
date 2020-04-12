@@ -26,7 +26,8 @@ export class EditCategoriesComponent implements OnInit {
 
   constructor(
     private categoriesDataService: CategoriesDataService, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -63,10 +64,10 @@ export class EditCategoriesComponent implements OnInit {
         _id: this.category._id,
         slug: this.category.slug
       };
-      return this.categoriesDataService.updateCategory(this.category._id, this.updFormData).subscribe(responseData => console.log(responseData));
+      return this.categoriesDataService.updateCategory(this.category._id, this.updFormData).subscribe(responseData => this.router.navigate(['/admin/categories']));
     } else {
         this.newFormData.name = this.categoryForm.get('name').value;
-        return this.categoriesDataService.createCategory(this.newFormData).subscribe(responseData => console.log(responseData));
+        return this.categoriesDataService.createCategory(this.newFormData).subscribe(responseData => this.router.navigate(['/admin/categories']));
     }
 
   }
