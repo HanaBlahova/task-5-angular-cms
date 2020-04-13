@@ -20,3 +20,21 @@
     .statistics div {
         padding: 5px;
     }
+
+    .loading:after {
+        content: '.';
+        animation: dots 2s linear infinite;
+    }
+
+    @keyframes dots {
+        0%, 30% {
+            content: '.'
+        }
+        60% {
+            content: '..'
+        }
+        90%, 100% {
+            content: '...'
+        }
+
+    }

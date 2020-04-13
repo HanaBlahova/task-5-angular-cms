@@ -6,7 +6,7 @@
             <input type="email" class="form-control col-md-10" formControlName="email" id="email" placeholder="E-mail">
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row" *ngIf="!exist">
             <label for="password" class="col-md-2">Password</label>
             <input type="password" class="form-control col-md-10" formControlName="password" id="password" placeholder="Password">
         </div>

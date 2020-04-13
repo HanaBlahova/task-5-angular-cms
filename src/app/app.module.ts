@@ -23,6 +23,7 @@ import { CategoryMenuComponent } from './layout/category-menu/category-menu.comp
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     BrowserModule,
     AppRoutingModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [
     {

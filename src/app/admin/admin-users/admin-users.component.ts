@@ -13,6 +13,11 @@ export class AdminUsersComponent implements OnInit {
 
   usersPageable: UsersPageable;
   users: User[];
+  p: number; 
+  query = {
+    page: '1',
+    limit: '10'
+  }
   
   constructor(private usersDataService: UsersDataService, private router: Router) { }
 
@@ -20,6 +25,8 @@ export class AdminUsersComponent implements OnInit {
 
     this.usersDataService.getUsers().subscribe((data: UsersPageable) => {
       this.usersPageable = data;
+      console.log(this.usersPageable.pagination);
+      this.p = this.usersPageable.pagination.page;
       this.users = this.usersPageable.items
     });
   }
@@ -27,5 +34,17 @@ export class AdminUsersComponent implements OnInit {
   onDeleteUser() {
 
   };
+
+  pageChanged($event: any) {
+    this.query.page = $event.toString();
+    console.log(this.query.page);
+    console.log(this.query);
+    this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
+      this.usersPageable = data;
+      console.log(this.usersPageable.pagination);
+      this.p = this.usersPageable.pagination.page;
+      this.users = this.usersPageable.items
+    });
+  }
 
 }

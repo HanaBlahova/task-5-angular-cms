@@ -3,21 +3,21 @@
         <div class="col-md-4">
             <div class="statistics">
                 <div>POSTS</div>
-                <div *ngIf="postsArr === undefined">...</div>
+                <div class="loading" *ngIf="postsArr === undefined"></div>
                 <div *ngIf="postsArr !== undefined">{{postsArr.length}}</div>
             </div>
        </div>
        <div class="col-md-4">
            <div class="statistics">
                 <div>CATEGORIES</div>
-                <div *ngIf="categoriesArr === undefined">...</div>
+                <div class="loading" *ngIf="categoriesArr === undefined"></div>
                 <div *ngIf="categoriesArr !== undefined">{{categoriesArr.length}}</div>
            </div>
       </div>
       <div class="col-md-4">
           <div class="statistics">
             <div>USERS</div>
-            <div *ngIf="usersArr === undefined">...</div>
+            <div class="loading" *ngIf="usersArr === undefined"></div>
             <div *ngIf="usersArr !== undefined">{{usersArr.length}}</div>
           </div>
        </div>

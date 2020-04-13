@@ -17,6 +17,7 @@ export class EditUsersComponent implements OnInit {
   user:User;
   newFormData: UserForm;
   updFormData: User;
+  exist: boolean;
 
   constructor(
     private usersDataService: UsersDataService,
@@ -28,24 +29,26 @@ export class EditUsersComponent implements OnInit {
 
     this.userForm = new FormGroup({
       'email': new FormControl(null, Validators.required),
-      'password': new FormControl(null, Validators.required)
+      'password': new FormControl(null)
     })
+
+    console.log('test');
 
     this.route.params.pipe(
       switchMap((params: Params) => {
-        if(params._id) {
-          return this.usersDataService.getUser(params._id);
+        if(params.id) {
+          return this.usersDataService.getUser(params.id);
         } else {
           return of(null);
         }
       })).subscribe((data: User) => {
         this.user = data;
-        // if(this.user) {
-        //   this.userForm.patchValue({
-        //     'email': this.user.email,
-        //     'password': ''
-        //   })
-        //}
+          if(this.user) {
+            this.exist = true;
+            this.userForm.patchValue({
+             'email': this.user.email,
+           })
+        }
       })
     }
 
