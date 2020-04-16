@@ -5,6 +5,8 @@ import { Post, PostForm } from 'src/app/model/post.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ContextService } from 'src/app/service/context.service';
+import { Category } from 'src/app/model/category.model';
 
 @Component({
   selector: 'app-edit-posts',
@@ -17,9 +19,12 @@ export class EditPostsComponent implements OnInit {
   postForm: FormGroup;
   newFormData: PostForm;
   updFormData: Post;
+  categories: Category[];
+  //postCategories: Category[];
 
     constructor(
       private postsDataService: PostsDataService,
+      private contextService: ContextService,
       private route: ActivatedRoute,
       private router: Router
     ) { }
@@ -30,7 +35,8 @@ ngOnInit(): void {
     'title': new FormControl(null, Validators.required),
     'perex': new FormControl(null, Validators.required),
     'content': new FormControl(null, Validators.required),
-    'image': new FormControl(null)
+    'image': new FormControl(null),
+    'categories': new FormControl(null)
   });
 
   this.route.params.pipe(
@@ -43,44 +49,53 @@ ngOnInit(): void {
     })
   ).subscribe((data: Post) => {
     this.post = data;
+    //this.postCategories = this.post.categories;
     if(this.post) {
       this.postForm.patchValue({
         'title': this.post.title,
         'perex': this.post.perex,
         'content': this.post.content,
-        'image': this.post.image,
+        'image': this.post.img,
+        'categories': this.post.categories.map((data) => data._id)
       });
     }
   })
+
+  this.contextService.categories$.subscribe((data: Category[]) => this.categories = data)
 
 
 }
 
 onPostSubmit() {
   let img: string = this.postForm.get('image').value;
-    if(img === null || img === '') {
+    if(img === null || img === '' || img === undefined) {
       img = 'https://9auileboys-flywheel.netdna-ssl.com/wp-content/uploads/2019/03/news.jpg'
-    } else if (this.post.image !== null) {
-      img = this.post.image;
+    } else if (this.post.img !== null) {
+      img = this.post.img;
     } else {
       img;
     };
+    console.log(img);
+
   if (this.post) {
     this.updFormData = {
       title: this.postForm.get('title').value,
       perex: this.postForm.get('perex').value,
       content: this.postForm.get('content').value,
-      image: img,
+      img: img,
       _id: this.post._id,
-      slug: this.post.slug
+      slug: this.post.slug,
+      categories: this.postForm.get('categories').value
     }
+    console.log(this.updFormData.img);
     return this.postsDataService.updatePost(this.post._id, this.updFormData).subscribe(responseData => this.router.navigate(['/admin/posts']));
   } else {
     this.newFormData = {
       title: this.postForm.get('title').value,
       perex: this.postForm.get('perex').value,
       content: this.postForm.get('content').value,
-      image: img
+      img: img,
+      categories: this.postForm.get('categories').value
     }
     return this.postsDataService.createPost(this.newFormData).subscribe(responseData =>  this.router.navigate(['/admin/posts']));
   }

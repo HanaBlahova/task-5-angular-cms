@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Category, CategoryForm } from 'src/app/model/category.model';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ContextService } from 'src/app/service/context.service';
 
 @Component({
   selector: 'app-edit-categories',
@@ -26,6 +27,7 @@ export class EditCategoriesComponent implements OnInit {
 
   constructor(
     private categoriesDataService: CategoriesDataService, 
+    private contextService: ContextService,
     private route: ActivatedRoute,
     private router: Router
     ) { }
@@ -67,7 +69,10 @@ export class EditCategoriesComponent implements OnInit {
       return this.categoriesDataService.updateCategory(this.category._id, this.updFormData).subscribe(responseData => this.router.navigate(['/admin/categories']));
     } else {
         this.newFormData.name = this.categoryForm.get('name').value;
-        return this.categoriesDataService.createCategory(this.newFormData).subscribe(responseData => this.router.navigate(['/admin/categories']));
+        return this.categoriesDataService.createCategory(this.newFormData).subscribe((res: any) => {
+          this.router.navigate(['/admin/categories']);
+
+        });
     }
 
   }

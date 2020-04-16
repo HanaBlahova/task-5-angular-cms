@@ -7,19 +7,33 @@
             <button class="btn btn-success" routerLink="/admin/posts/create">New Post</button>
         </div>
     </div>
-    <div class="post row" *ngFor="let post of posts">
-      <div class="col-md-2">
-          <img src="{{ post?.image }}" class="image" alt="" placeholder="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png">
-      </div>
-      <div class="col-md-8">
-          <div class="title">{{post.title}}</div>
-          <div>{{ post.perex }}</div>
-      </div>
-      <div class="col-md-1">
-          <button class="btn btn-primary" routerLink="/admin/posts/edit/{{post.slug}}">Upd</button>
-      </div>
-      <div class="col-md-1">
-          <button class="btn btn-danger" (click)="onDeletePost()">Del</button>
-      </div>
+    <div *ngIf="postsPageable !== undefined">
+        <div class="post row" 
+        *ngFor="let post of posts | paginate: { 
+            itemsPerPage: query.limit, 
+            currentPage: p,
+            totalItems: postsPageable.pagination.total
+            }" >
+            <div class="col-md-2">
+                <img src="{{ post.img }}" class="image" alt="" placeholder="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png">
+            </div>
+            <div class="col-md-8">
+                <div class="title">{{post.title}}</div>
+                <div>{{ post.perex }}</div>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-primary" routerLink="/admin/posts/edit/{{post.slug}}">Upd</button>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger" (click)="onDeletePost(post._id)">Del</button>
+            </div>
+          </div>
+    </div>
+    <div class="pagination" *ngIf="this.total > this.query.limit">
+        <pagination-controls 
+            (pageChange)= "pageChanged($event)"
+            maxSize="10"
+            directionLinks="true">
+        </pagination-controls>
     </div>
 </div>

@@ -1,7 +1,11 @@
 <div class="">
     <div>
-        <img src="{{post?.image}}" class="image" alt="" placeholder="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png">
+        <img src="{{post.img}}" class="image" alt="" placeholder="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png">
     </div>
     <div class="title"><a routerLink="/archive/{{post.slug}}">{{post.title}}</a></div>
     <div>{{post.perex}}</div>
+    {{postCategories|json}}
+    <div>
+        <span *ngFor="let category of postCategories">{{category.name}}</span>
+    </div>
 </div>

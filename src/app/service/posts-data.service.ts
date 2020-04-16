@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Post, PostForm } from '../model/post.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PostsPageable } from '../model/pageable.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class PostsDataService {
 
   constructor(private http: HttpClient) { }
 
-  getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.url}/posts`);
+  getPosts(params?: any): Observable<PostsPageable> {
+    return this.http.get<PostsPageable>(`${this.url}/posts`, {params: params});
   }
 
   getPost(slug: string): Observable<Post> {

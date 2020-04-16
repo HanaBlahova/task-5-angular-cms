@@ -11,7 +11,7 @@
         <div 
         class="user row" 
         *ngFor="let user of users | paginate: { 
-            itemsPerPage: usersPageable.pagination.limit, 
+            itemsPerPage: query.limit, 
             currentPage: p,
             totalItems: usersPageable.pagination.total
             }">
@@ -20,15 +20,15 @@
             </div>
             <div class="col-md-3">
                 <div class="role">{{user.roles}}</div>
-        </div>
-            <div class="col-md-1">
-                <button class="btn btn-primary" routerLink="/admin/users/edit/{{user._id}}">Upd</button>
             </div>
             <div class="col-md-1">
-                <button class="btn btn-danger" (click)="onDeleteUser()">Del</button>
+                <button class="btn btn-primary" [disabled]="disabledBtn" routerLink="/admin/users/edit/{{user._id}}">Upd</button>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger" [disabled]="disabledBtn" (click)="onDeleteUser(user._id)">Del</button>
             </div>    
         </div>
-        <div class="pagination2">
+        <div class="pagination" *ngIf="this.total > this.query.limit">
             <pagination-controls 
                 (pageChange)= "pageChanged($event)"
                 maxSize="10"

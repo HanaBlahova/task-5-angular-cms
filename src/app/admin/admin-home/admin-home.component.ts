@@ -5,7 +5,7 @@ import { UsersDataService } from 'src/app/service/users-data.service';
 import { Post } from 'src/app/model/post.model';
 import { User } from 'src/app/model/user.model';
 import { Category } from 'src/app/model/category.model';
-import { UsersPageable } from 'src/app/model/pageable.model';
+import { UsersPageable, PostsPageable } from 'src/app/model/pageable.model';
 
 @Component({
   selector: 'app-admin-home',
@@ -18,6 +18,8 @@ export class AdminHomeComponent implements OnInit {
   categoriesArr: Category[];
   usersArr: User[];
   usersPageable: UsersPageable;
+  totalUsers: number;
+  totalPosts: number;
 
   constructor(
     private postsDataService: PostsDataService,
@@ -27,11 +29,16 @@ export class AdminHomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.postsDataService.getPosts().subscribe((data: Post[]) => this.postsArr = data);
+    this.postsDataService.getPosts().subscribe((data: PostsPageable) => {
+      this.postsArr = data.items;
+      this.totalPosts = data.pagination.total;
+    });
     this.categoriesDataService.getCategories().subscribe((data: Category[]) => this.categoriesArr = data);
     this.usersDataService.getUsers().subscribe((data: UsersPageable) => {
       this.usersPageable = data;
       this.usersArr = this.usersPageable.items;
+      this.totalUsers = this.usersPageable.pagination.total;
+      console.log(data.items)
     });
   }
 

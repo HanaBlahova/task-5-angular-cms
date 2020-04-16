@@ -14,10 +14,13 @@ export class AdminUsersComponent implements OnInit {
   usersPageable: UsersPageable;
   users: User[];
   p: number; 
+  total: number;
   query = {
-    page: '1',
-    limit: '10'
+    page: 1,
+    limit: 10
   }
+
+  disabledBtn: boolean = true;
   
   constructor(private usersDataService: UsersDataService, private router: Router) { }
 
@@ -27,11 +30,12 @@ export class AdminUsersComponent implements OnInit {
       this.usersPageable = data;
       console.log(this.usersPageable.pagination);
       this.p = this.usersPageable.pagination.page;
+      this.total = this.usersPageable.pagination.total;
       this.users = this.usersPageable.items
     });
   }
 
-  onDeleteUser() {
+  onDeleteUser(id:string) {
 
   };
 

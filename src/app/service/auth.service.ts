@@ -36,8 +36,9 @@ export class AuthService {
       map((response: any) => {
         console.log(response);
         if(response.token) {
-          this.user$.next(JWT(response.token));
-          this.cookieService.set('token', response.token);
+          let token:any = JWT(response.token)
+          this.user$.next(token);
+          this.cookieService.set('token', response.token, null, '/');
           this.isLoggedIn$.next(true);
         } else if (response.message === 'Duplicate email.') {
           alert('Duplicated email.');
@@ -53,7 +54,7 @@ export class AuthService {
       map((response: any) => {
         if(response.token) {
           this.user$.next(JWT(response.token));
-          this.cookieService.set('token', response.token);
+          this.cookieService.set('token', response.token, null, '/');
           console.log(response.token);
           this.isLoggedIn$.next(true);
           this.verifyAdmin();
@@ -76,7 +77,7 @@ export class AuthService {
     this.isLoggedIn$.next(false);
     this.isAdmin$.next(false);
     this.router.navigate(['/login']);
-    this.cookieService.deleteAll();
+    this.cookieService.deleteAll(); // change, it shouldn´t be deleteAll
   }
 
   verifyAdmin() {

@@ -15,7 +15,7 @@
              <button class="btn btn-primary" routerLink="/admin/categories/edit/{{category._id}}">Upd</button>
         </div>
         <div class="col-md-1">
-            <button class="btn btn-danger" (click)="onDeleteCategory()">Del</button>
+            <button class="btn btn-danger" (click)="onDeleteCategory(category._id)">Del</button>
         </div>    
     </div>
 </div>

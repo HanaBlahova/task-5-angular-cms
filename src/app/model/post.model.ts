@@ -6,7 +6,7 @@ export interface PostForm {
     perex: string;
     content: string;
     categories?: string[];
-    image: string
+    img: string
 }
 
 export interface Post {
@@ -14,8 +14,9 @@ export interface Post {
     title: string;
     perex: string;
     content: string;
-    image: string;
+    img: string;
     slug: string;
     author?: User;
     categories?: Category[]
 }
+

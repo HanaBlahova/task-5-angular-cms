@@ -2,7 +2,39 @@
     <div>
         <app-category-menu></app-category-menu>
     </div>
-    <div class="posts">
-        <app-post class="post" *ngFor="let post of posts" [post]="post"></app-post>
+    <!-- <div *ngIf="postsPageable !== undefined">
+        <div     
+        *ngFor="let post of posts | paginate: { 
+            itemsPerPage: postsPageable.pagination.limit, 
+            currentPage: p,
+            totalItems: postsPageable.pagination.total
+            }">
+            <div class="posts">
+                <app-post class="post" *ngFor="let post of posts" [post]="post">
+                </app-post>
+            </div>
+        </div>
+    </div> -->
+    <div *ngIf="postsPageable !== undefined">
+        <div class="posts">
+            <app-post 
+            class="post" 
+            *ngFor="let post of posts | paginate: { 
+                    itemsPerPage: query.limit, 
+                    currentPage: p,
+                    totalItems: postsPageable.pagination.total
+                    }" 
+            [post]="post">
+            </app-post>
+        </div>
     </div>
+    <div class="pagination" *ngIf="this.total > this.query.limit">
+        <pagination-controls 
+            (pageChange)= "pageChanged($event)"
+            maxSize="10"
+            directionLinks="true">
+        </pagination-controls>
+    </div>
+    
+    
 </div>

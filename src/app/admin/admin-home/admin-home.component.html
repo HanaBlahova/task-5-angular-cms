@@ -4,7 +4,7 @@
             <div class="statistics">
                 <div>POSTS</div>
                 <div class="loading" *ngIf="postsArr === undefined"></div>
-                <div *ngIf="postsArr !== undefined">{{postsArr.length}}</div>
+                <div *ngIf="postsArr !== undefined">{{totalPosts}}</div>
             </div>
        </div>
        <div class="col-md-4">
@@ -18,7 +18,7 @@
           <div class="statistics">
             <div>USERS</div>
             <div class="loading" *ngIf="usersArr === undefined"></div>
-            <div *ngIf="usersArr !== undefined">{{usersArr.length}}</div>
+            <div *ngIf="usersArr !== undefined">{{totalUsers}}</div>
           </div>
        </div>
     </div>

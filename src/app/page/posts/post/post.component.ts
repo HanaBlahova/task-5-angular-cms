@@ -3,6 +3,7 @@ import { PostsDataService } from 'src/app/service/posts-data.service';
 import { Post } from 'src/app/model/post.model';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Category } from 'src/app/model/category.model';
 
 @Component({
   selector: 'app-post',
@@ -12,11 +13,16 @@ import { Observable } from 'rxjs';
 export class PostComponent implements OnInit {
 
   @Input('post') post: Post;
+  postCategories: Category[];
 
-  constructor(private postsDataService: PostsDataService, private route: ActivatedRoute) { }
+
+  constructor(
+    private postsDataService: PostsDataService, 
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    
+    this.postCategories = this.post.categories;
+    console.log(this.postCategories);
   }
 
  
