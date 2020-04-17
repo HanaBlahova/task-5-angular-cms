@@ -6,7 +6,7 @@
             </li>
             <div *ngFor="let category of categories">
                 <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active bg-dark" data-toggle="pill" routerLink="/archive/{{category.name}}">{{category.name}}</a>
+                    <a class="nav-link" routerLinkActive="active bg-dark" data-toggle="pill" (click)="categoryFilter($event)">{{category.name}}</a>
                 </li>
             </div>
         </ul>  

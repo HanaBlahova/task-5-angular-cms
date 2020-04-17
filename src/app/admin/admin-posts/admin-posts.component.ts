@@ -32,6 +32,7 @@ export class AdminPostsComponent implements OnInit {
       this.p = this.postsPageable.pagination.page;
       this.total = this.postsPageable.pagination.total;
       console.log(this.posts);
+      console.log(this.postsPageable);
     });
 
   }

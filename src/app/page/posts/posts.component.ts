@@ -21,13 +21,25 @@ export class PostsComponent implements OnInit {
     page: 1,
     limit: 6
   }
+  //   sort: {
+  //     enabled: true,
+  //     fields: {
+  //       name: 'desc'
+  //     }
+  //   },
+  //   // filter: {
+  //   //   categories: '5e978f41e6157c55e1edad6e'
+  //   // }
+  // }
   categories: Category[];
+  filteringCategory: string;
 
   constructor(
     private postsDataService: PostsDataService,
     private contextService: ContextService) { }
 
   ngOnInit(): void {
+    console.log('Hello');
 
     this.postsDataService.getPosts(this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
@@ -42,7 +54,10 @@ export class PostsComponent implements OnInit {
 
     this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
 
-    
+    // this.contextService.filttringCategory$.subscribe((data: string) => {
+    //   this.filteringCategory = data;
+    //   this.query.filter.categories = this.filteringCategory;
+    // });
 
   }
 
@@ -57,6 +72,7 @@ export class PostsComponent implements OnInit {
       this.posts = this.postsPageable.items
     });
   };
+
 
 
 

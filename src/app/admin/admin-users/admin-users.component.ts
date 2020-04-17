@@ -3,6 +3,7 @@ import { UsersDataService } from 'src/app/service/users-data.service';
 import { User } from 'src/app/model/user.model';
 import { Router } from '@angular/router';
 import { UsersPageable } from 'src/app/model/pageable.model';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-users',
@@ -19,14 +20,24 @@ export class AdminUsersComponent implements OnInit {
     page: 1,
     limit: 10
   }
+  roles: string[] = ['ADMIN', 'USER'];
 
   disabledBtn: boolean = true;
+
+  searchForm: FormGroup;
   
-  constructor(private usersDataService: UsersDataService, private router: Router) { }
+  constructor(
+    private usersDataService: UsersDataService, 
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
 
-    this.usersDataService.getUsers().subscribe((data: UsersPageable) => {
+    this.searchForm = new FormGroup({
+      'search': new FormControl(null)
+    })
+
+    this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
       this.usersPageable = data;
       console.log(this.usersPageable.pagination);
       this.p = this.usersPageable.pagination.page;
@@ -34,6 +45,10 @@ export class AdminUsersComponent implements OnInit {
       this.users = this.usersPageable.items
     });
   }
+
+  onSearch($event: any) {
+    console.log($event);
+  };
 
   onDeleteUser(id:string) {
 
