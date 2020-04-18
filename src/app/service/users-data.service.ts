@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User, UserForm } from '../model/user.model';
 import { UsersPageable } from '../model/pageable.model';
+import { ContextService } from './context.service';
+import { SortFilter } from '../model/sort-filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +13,35 @@ import { UsersPageable } from '../model/pageable.model';
 export class UsersDataService {
 
   url = environment.api.url;
-  sortBy: string = 'email';
-  sortValue: string = 'desc';
-  filterBy: string = 'email';
-  filterValue: string = 'test@test.com';
-  //filter: string = `&filter[${this.filterBy}]=${this.filterValue}`;
-  filter: string = ``;
+  // sortByU: string = 'email';
+  // sortValueU: string = 'desc';
+  // filterByU: string = 'roles';
+  // filterValueU: string = 'ADMIN';
+  // filter: string = `&filter[${this.filterByU}]=${this.filterValueU}`;
+  //filter: string = ``;
 
-  constructor(private http: HttpClient) { }
+  queryParams: SortFilter;
+  sortBy: string;
+  sortValue: string;
+  filterBy: string;
+  filterValue: string;
+  filter: string;
+
+  constructor(private http: HttpClient, private contextService: ContextService) {
+    this.contextService.queryParamsUsers$.subscribe((data: SortFilter) => {
+      this.queryParams = data;
+      // this.sortBy = this.queryParams.sortBy;
+      // this.sortValue = this.queryParams.sortValue;
+      // this.filterBy = this.queryParams.filterBy;
+      // this.filterValue = this.queryParams.filterValue;
+      // this.filter = this.queryParams.filter;
+      console.log(this.queryParams);
+      console.log(this.queryParams.filter);
+    })
+   }
 
   getUsers(params?: any): Observable<UsersPageable> {
-    return this.http.get<UsersPageable>(`${this.url}/users?sort[${this.sortBy}]=${this.sortValue}${this.filter}`, {params: params});
+    return this.http.get<UsersPageable>(`${this.url}/users?sort[${this.queryParams.sortBy}]=${this.queryParams.sortValue}${this.queryParams.filter}`, {params: params});
     //return this.http.get<UsersPageable>('http://localhost:8080/api/v1/users?page=1&limit=20&sort[email]=desc&filter[email]=test@test.com');
   }
 

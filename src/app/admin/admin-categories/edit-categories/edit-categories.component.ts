@@ -14,8 +14,9 @@ import { ContextService } from 'src/app/service/context.service';
 })
 export class EditCategoriesComponent implements OnInit {
 
-  category: Category;
   categoryForm: FormGroup;
+
+  category: Category;
   newFormData: CategoryForm = {
     name: ''
   };
@@ -33,7 +34,6 @@ export class EditCategoriesComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-
 
     this.categoryForm = new FormGroup({
       'name': new FormControl(null, Validators.required)
@@ -57,7 +57,6 @@ export class EditCategoriesComponent implements OnInit {
     });
   
   }
-
   
   onCategorySubmit() {
     if(this.category) {
@@ -67,15 +66,12 @@ export class EditCategoriesComponent implements OnInit {
         slug: this.category.slug
       };
       return this.categoriesDataService.updateCategory(this.category._id, this.updFormData).subscribe(responseData => this.router.navigate(['/admin/categories']));
-    } else {
+      } else {
         this.newFormData.name = this.categoryForm.get('name').value;
         return this.categoriesDataService.createCategory(this.newFormData).subscribe((res: any) => {
           this.router.navigate(['/admin/categories']);
-
-        });
+      });
     }
-
   }
-
 
 }

@@ -25,12 +25,39 @@
             a:hover {
                 color: #6c757d;
             }
-    
-    .col-md-2 {
-        padding: 10px;
+
+        .perex {
+            max-width: 200px;
+        }
+
+.headline {
+    padding: 15px 15px;
+    font-weight: 700;
+    border-bottom: 1px solid #6c757d60 ;
+}
+
+form {
+     max-width: 150px;
+     //padding: 6px 0px !important;
+    }
+
+    .fa-search {
+        color: #ced4da;
+    }
+            
+    .fa-search:hover {
+        color: #000000;
+    }
+            
+    .btn-default {
+        margin: 0px;
+        padding: 6px 10px;
+        border: 1px solid #ced4da;
     }
 
     .btn-success {
         width: 140px;
+        margin: 0px;
+        margin-bottom: 20px;
     }
 

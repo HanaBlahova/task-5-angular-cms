@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PostsDataService } from '../../service/posts-data.service';
 import { Post } from 'src/app/model/post.model';
 import { Category } from 'src/app/model/category.model';
-import { CategoriesDataService } from 'src/app/service/categories-data.service';
 import { PostsPageable } from 'src/app/model/pageable.model';
 import { ContextService } from 'src/app/service/context.service';
+import { SortFilter } from 'src/app/model/sort-filter.model';
 
 @Component({
   selector: 'app-posts',
@@ -21,16 +21,8 @@ export class PostsComponent implements OnInit {
     page: 1,
     limit: 6
   }
-  //   sort: {
-  //     enabled: true,
-  //     fields: {
-  //       name: 'desc'
-  //     }
-  //   },
-  //   // filter: {
-  //   //   categories: '5e978f41e6157c55e1edad6e'
-  //   // }
-  // }
+  queryParams: SortFilter;
+
   categories: Category[];
   filteringCategory: string;
 
@@ -39,7 +31,6 @@ export class PostsComponent implements OnInit {
     private contextService: ContextService) { }
 
   ngOnInit(): void {
-    console.log('Hello');
 
     this.postsDataService.getPosts(this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
@@ -54,10 +45,7 @@ export class PostsComponent implements OnInit {
 
     this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
 
-    // this.contextService.filttringCategory$.subscribe((data: string) => {
-    //   this.filteringCategory = data;
-    //   this.query.filter.categories = this.filteringCategory;
-    // });
+    this.contextService.queryParamsPosts$.subscribe((data: SortFilter) => this.queryParams = data);
 
   }
 

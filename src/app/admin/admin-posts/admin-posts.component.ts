@@ -4,6 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/model/post.model';
 import { switchMap } from 'rxjs/operators';
 import { PostsPageable } from 'src/app/model/pageable.model';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Category } from 'src/app/model/category.model';
+import { ContextService } from 'src/app/service/context.service';
+import { SortFilter } from 'src/app/model/sort-filter.model';
 
 @Component({
   selector: 'app-admin-posts',
@@ -12,18 +16,30 @@ import { PostsPageable } from 'src/app/model/pageable.model';
 })
 export class AdminPostsComponent implements OnInit {
 
+  searchForm: FormGroup;
+
   postsPageable: PostsPageable;
   posts: Post[];
+  categories: Category[];
   p: number;
   total: number;
   query = {
     page: 1,
     limit: 6
   }
+  queryParams: SortFilter;
 
-  constructor(private postsDataService: PostsDataService, private router: Router) { }
+
+  constructor(
+    private postsDataService: PostsDataService,
+    private contextService: ContextService
+    ) { }
 
   ngOnInit(): void {
+
+    this.searchForm = new FormGroup({
+      'search': new FormControl(null)
+    })
 
     // Get Posts
     this.postsDataService.getPosts().subscribe((data: PostsPageable) => {
@@ -35,7 +51,19 @@ export class AdminPostsComponent implements OnInit {
       console.log(this.postsPageable);
     });
 
+    this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
+
+    this.contextService.queryParamsPostsA$.subscribe((data: SortFilter) => this.queryParams = data);
+
   }
+
+  onChange($event) {
+
+  };
+
+  onSearch() {
+
+  };
 
   onDeletePost(id: string) {
     this.postsDataService.deletePost(id).pipe(
@@ -47,7 +75,7 @@ export class AdminPostsComponent implements OnInit {
       this.postsPageable = data;
       this.posts = data.items;
     });
-  }
+  };
 
   pageChanged($event: any) {
     this.query.page = $event;
@@ -59,5 +87,5 @@ export class AdminPostsComponent implements OnInit {
       this.p = this.postsPageable.pagination.page;
       this.posts = this.postsPageable.items
     });
-  }
+  };
 }

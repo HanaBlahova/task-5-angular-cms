@@ -15,12 +15,12 @@ import { Category } from 'src/app/model/category.model';
 })
 export class EditPostsComponent implements OnInit {
 
-  post: Post;
   postForm: FormGroup;
+
+  post: Post;
   newFormData: PostForm;
   updFormData: Post;
   categories: Category[];
-  //postCategories: Category[];
 
     constructor(
       private postsDataService: PostsDataService,
@@ -49,7 +49,6 @@ ngOnInit(): void {
     })
   ).subscribe((data: Post) => {
     this.post = data;
-    //this.postCategories = this.post.categories;
     if(this.post) {
       this.postForm.patchValue({
         'title': this.post.title,
@@ -63,19 +62,17 @@ ngOnInit(): void {
 
   this.contextService.categories$.subscribe((data: Category[]) => this.categories = data)
 
-
 }
 
 onPostSubmit() {
   let img: string = this.postForm.get('image').value;
-    if(img === null || img === '' || img === undefined) {
-      img = 'https://9auileboys-flywheel.netdna-ssl.com/wp-content/uploads/2019/03/news.jpg'
-    } else if (this.post.img !== null) {
-      img = this.post.img;
-    } else {
-      img;
-    };
-    console.log(img);
+  if(img === null || img === '' || img === undefined) {
+    img = 'https://9auileboys-flywheel.netdna-ssl.com/wp-content/uploads/2019/03/news.jpg'
+   } else if (this.post.img !== null) {
+     img = this.post.img;
+   } else {
+     img;
+   };
 
   if (this.post) {
     this.updFormData = {

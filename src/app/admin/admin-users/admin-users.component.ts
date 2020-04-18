@@ -4,6 +4,8 @@ import { User } from 'src/app/model/user.model';
 import { Router } from '@angular/router';
 import { UsersPageable } from 'src/app/model/pageable.model';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ContextService } from 'src/app/service/context.service';
+import { SortFilter } from 'src/app/model/sort-filter.model';
 
 @Component({
   selector: 'app-admin-users',
@@ -11,6 +13,8 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./admin-users.component.scss']
 })
 export class AdminUsersComponent implements OnInit {
+
+  searchForm: FormGroup;
 
   usersPageable: UsersPageable;
   users: User[];
@@ -24,11 +28,11 @@ export class AdminUsersComponent implements OnInit {
 
   disabledBtn: boolean = true;
 
-  searchForm: FormGroup;
+  queryParams: SortFilter;
   
   constructor(
     private usersDataService: UsersDataService, 
-    private router: Router
+    private contextService: ContextService,
   ) { }
 
   ngOnInit(): void {
@@ -44,10 +48,24 @@ export class AdminUsersComponent implements OnInit {
       this.total = this.usersPageable.pagination.total;
       this.users = this.usersPageable.items
     });
+
+    this.contextService.queryParamsUsers$.subscribe((data: SortFilter) => this.queryParams = data);
   }
 
-  onSearch($event: any) {
-    console.log($event);
+  onSearch() {
+    console.log(this.searchForm.get('search').value);
+    if(!this.searchForm.get('search').value) {
+      this.queryParams.filter = '';
+      console.log(this.queryParams);
+      this.contextService.queryParamsUsers$.next(this.queryParams);
+      this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items)
+    } else {
+      this.queryParams.filter = this.contextService.toFilterString('email', this.searchForm.get('search').value);
+      console.log(this.queryParams);
+      this.contextService.queryParamsUsers$.next(this.queryParams);
+      this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
+    }
+
   };
 
   onDeleteUser(id:string) {
@@ -64,6 +82,19 @@ export class AdminUsersComponent implements OnInit {
       this.p = this.usersPageable.pagination.page;
       this.users = this.usersPageable.items
     });
-  }
+  };
+
+  onChange($event: any) {
+    if($event.srcElement.value === 'Roles'  ) {
+      this.queryParams.filter = '';
+      this.contextService.queryParamsUsers$.next(this.queryParams);
+      this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
+    } else {
+      this.queryParams.filter = this.contextService.toFilterString('roles', $event.srcElement.value);
+      this.contextService.queryParamsUsers$.next(this.queryParams);
+      this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
+    }
+    console.log($event.srcElement.value);
+  };
 
 }

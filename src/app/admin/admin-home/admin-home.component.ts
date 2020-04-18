@@ -14,10 +14,7 @@ import { UsersPageable, PostsPageable } from 'src/app/model/pageable.model';
 })
 export class AdminHomeComponent implements OnInit {
 
-  postsArr: Post[];
   categoriesArr: Category[];
-  usersArr: User[];
-  usersPageable: UsersPageable;
   totalUsers: number;
   totalPosts: number;
 
@@ -30,14 +27,12 @@ export class AdminHomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.postsDataService.getPosts().subscribe((data: PostsPageable) => {
-      this.postsArr = data.items;
       this.totalPosts = data.pagination.total;
     });
     this.categoriesDataService.getCategories().subscribe((data: Category[]) => this.categoriesArr = data);
+
     this.usersDataService.getUsers().subscribe((data: UsersPageable) => {
-      this.usersPageable = data;
-      this.usersArr = this.usersPageable.items;
-      this.totalUsers = this.usersPageable.pagination.total;
+      this.totalUsers = data.pagination.total;
       console.log(data.items)
     });
   }

@@ -1,5 +1,5 @@
-<div class="categories-menu"> 
-    <nav class="navbar navbar-expand-md">
+<div class="categories-menu row"> 
+    <nav class="navbar navbar-expand-md col-md-9">
         <ul class="nav nav-pills">
             <li class="nav-item" >
                 <a class="nav-link" routerLinkActive="active bg-dark" [routerLinkActiveOptions]="{exact: true}" data-toggle="pill" routerLink="/archive">All</a>
@@ -11,4 +11,16 @@
             </div>
         </ul>  
     </nav>
+    <div class="col-md-3">
+        <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+            <div class="input-group">
+              <input type="text" class="form-control search" formControlName="search" placeholder="Search">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+        </form>
+    </div>
 </div>
