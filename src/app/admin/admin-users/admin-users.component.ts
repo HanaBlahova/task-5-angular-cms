@@ -18,14 +18,13 @@ export class AdminUsersComponent implements OnInit {
 
   usersPageable: UsersPageable;
   users: User[];
-  p: number; 
+  page: number; 
   total: number;
   query = {
     page: 1,
     limit: 10
   }
   roles: string[] = ['ADMIN', 'USER'];
-
   disabledBtn: boolean = true;
 
   queryParams: SortFilter;
@@ -44,7 +43,7 @@ export class AdminUsersComponent implements OnInit {
     this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
       this.usersPageable = data;
       console.log(this.usersPageable.pagination);
-      this.p = this.usersPageable.pagination.page;
+      this.page = this.usersPageable.pagination.page;
       this.total = this.usersPageable.pagination.total;
       this.users = this.usersPageable.items
     });
@@ -65,11 +64,10 @@ export class AdminUsersComponent implements OnInit {
       this.contextService.queryParamsUsers$.next(this.queryParams);
       this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
     }
-
   };
 
   onDeleteUser(id:string) {
-
+    // preparation for deleting users
   };
 
   pageChanged($event: any) {
@@ -79,7 +77,7 @@ export class AdminUsersComponent implements OnInit {
     this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
       this.usersPageable = data;
       console.log(this.usersPageable.pagination);
-      this.p = this.usersPageable.pagination.page;
+      this.page = this.usersPageable.pagination.page;
       this.users = this.usersPageable.items
     });
   };
@@ -88,11 +86,17 @@ export class AdminUsersComponent implements OnInit {
     if($event.srcElement.value === 'Roles'  ) {
       this.queryParams.filter = '';
       this.contextService.queryParamsUsers$.next(this.queryParams);
-      this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
+      this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
+        this.usersPageable = data;
+        this.users = data.items;
+      });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('roles', $event.srcElement.value);
       this.contextService.queryParamsUsers$.next(this.queryParams);
-      this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
+      this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
+        this.usersPageable = data;
+        this.users = data.items;
+      });
     }
     console.log($event.srcElement.value);
   };

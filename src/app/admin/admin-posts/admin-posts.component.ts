@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsDataService } from 'src/app/service/posts-data.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/model/post.model';
 import { switchMap } from 'rxjs/operators';
 import { PostsPageable } from 'src/app/model/pageable.model';
@@ -21,19 +20,23 @@ export class AdminPostsComponent implements OnInit {
   postsPageable: PostsPageable;
   posts: Post[];
   categories: Category[];
-  p: number;
+  page: number;
   total: number;
   query = {
     page: 1,
     limit: 6
   }
+
   queryParams: SortFilter;
 
 
   constructor(
     private postsDataService: PostsDataService,
     private contextService: ContextService
-    ) { }
+    ) { 
+      this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
+      this.contextService.queryParamsPostsA$.subscribe((data: SortFilter) => this.queryParams = data);
+    }
 
   ngOnInit(): void {
 
@@ -42,34 +45,61 @@ export class AdminPostsComponent implements OnInit {
     })
 
     // Get Posts
-    this.postsDataService.getPosts().subscribe((data: PostsPageable) => {
+    //this.queryParams.filter = '';
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
-      this.p = this.postsPageable.pagination.page;
+      this.page = this.postsPageable.pagination.page;
       this.total = this.postsPageable.pagination.total;
       console.log(this.posts);
       console.log(this.postsPageable);
     });
 
-    this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
-
-    this.contextService.queryParamsPostsA$.subscribe((data: SortFilter) => this.queryParams = data);
-
   }
 
-  onChange($event) {
-
+  onChange($event: any) {
+    if($event.srcElement.value === 'Categories') {
+      this.queryParams.filter = '';
+      console.log(this.queryParams);
+      this.contextService.queryParamsPostsA$.next(this.queryParams);
+      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+      this.postsPageable = data;
+      this.posts = data.items;
+      })
+    } else {
+      this.queryParams.filter = this.contextService.toFilterString('categories', $event.srcElement.value);
+      console.log(this.queryParams);
+      this.contextService.queryParamsPostsA$.next(this.queryParams);
+      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+      this.postsPageable = data;
+      this.posts = data.items;
+      })
+    }
   };
 
   onSearch() {
-
+    if(!this.searchForm.get('search').value) {
+      this.queryParams.filter = '';
+      this.contextService.queryParamsPostsA$.next(this.queryParams);
+      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+        this.postsPageable = data;
+        this.posts = data.items;
+      })
+    } else {
+      this.queryParams.filter = this.contextService.toFilterString('title', this.searchForm.get('search').value);
+      this.contextService.queryParamsPostsA$.next(this.queryParams);
+      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+        this.postsPageable = data;
+        this.posts = data.items;
+      })
+    }
   };
 
   onDeletePost(id: string) {
     this.postsDataService.deletePost(id).pipe(
       switchMap((res: any) => {
         console.log(res);
-        return this.postsDataService.getPosts();
+        return this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter);
       })
     ).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
@@ -81,10 +111,10 @@ export class AdminPostsComponent implements OnInit {
     this.query.page = $event;
     console.log(this.query.page);
     console.log(this.query);
-    this.postsDataService.getPosts(this.query).subscribe((data: PostsPageable) => {
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       console.log(this.postsPageable.pagination);
-      this.p = this.postsPageable.pagination.page;
+      this.page = this.postsPageable.pagination.page;
       this.posts = this.postsPageable.items
     });
   };

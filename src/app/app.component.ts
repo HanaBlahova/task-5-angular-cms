@@ -9,13 +9,9 @@ import { AuthService } from './service/auth.service';
 export class AppComponent implements OnInit {
   title = 'CMS';
 
-  constructor(
-    private authService: AuthService
-  ) {}
+  constructor( ) { }
 
   ngOnInit(): void {
-
-
 
   }
 

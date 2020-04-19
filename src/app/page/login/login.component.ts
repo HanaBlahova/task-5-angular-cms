@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.logFormData.password = this.loginForm.get('password').value;
 
     this.authService.loginUser(this.logFormData).subscribe(res => this.router.navigate(['/archive']));
-  }
+  };
 
 
 

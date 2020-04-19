@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -19,7 +14,6 @@ export class AuthInterceptor implements HttpInterceptor {
     private cookieService: CookieService
   ) {
     this.authService.isLoggedIn$.subscribe(data => this.isLoggedIn = data);
-    console.log('test');
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -32,7 +26,6 @@ export class AuthInterceptor implements HttpInterceptor {
           )
       });
     }
-
     return next.handle(request);
   }
 }

@@ -32,8 +32,6 @@ export class EditUsersComponent implements OnInit {
       'password': new FormControl(null)
     })
 
-    console.log('test');
-
     this.route.params.pipe(
       switchMap((params: Params) => {
         if(params.id) {
@@ -53,14 +51,6 @@ export class EditUsersComponent implements OnInit {
     }
 
   onUserSubmit() {
-    // if(this.user) {
-    //   this.updFormData = {
-    //     email: this.userForm.get('user').value,
-    //     _id: this.user._id,
-    //     roles: this.user.roles
-    //   }
-    //   return ...
-    // }
     this.newFormData = {
       email: this.userForm.get('email').value,
       password: this.userForm.get('password').value
@@ -73,7 +63,5 @@ export class EditUsersComponent implements OnInit {
       }
     });
   };
-
-  
 
 }

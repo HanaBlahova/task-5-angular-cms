@@ -1,8 +1,34 @@
 <div class="container">
-    <div>
-        <app-category-menu></app-category-menu>
+    <div class="container categories-menu">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-md">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item" >
+                            <button class="btn btn-outline-dark btn-category"(click)="categoryFilter('')">
+                                <a class="nav-link" data-toggle="pill">All</a>
+                            </button>
+                        </li>
+                        <div *ngFor="let category of categories">
+                            <li class="nav-item" >
+                                <button class="btn btn-outline-dark btn-category"(click)="categoryFilter(category._id)">
+                                    <a class="nav-link" data-toggle="pill">{{category.name}}</a>
+                                </button>
+                            </li>
+                        </div>
+                    </ul>  
+                </nav>
+            </div>
+        </div>
     </div>
     <div class="container">
         <h2>Last posts</h2>
     </div>
+    <div *ngIf="postsPageable !== undefined">
+        <div class="posts">
+            <app-post class="post" *ngFor="let post of posts" [post]="post">
+            </app-post>
+        </div>
+    </div>
 </div>
+

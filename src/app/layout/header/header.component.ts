@@ -28,12 +28,12 @@ export class HeaderComponent implements OnInit {
     });
     this.authService.user$.subscribe(data => this.user = data);
     this.authService.isAdmin$.subscribe(data => this.isAdmin = data);
-
+    
   }
 
   onLogout() {
     this.authService.logoutUser();
-  }
+  };
   
 
 }

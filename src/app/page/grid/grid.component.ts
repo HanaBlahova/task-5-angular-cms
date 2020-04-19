@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/app/model/category.model';
+import { ContextService } from 'src/app/service/context.service';
+import { PostsPageable } from 'src/app/model/pageable.model';
+import { Post } from 'src/app/model/post.model';
+import { SortFilter } from 'src/app/model/sort-filter.model';
+import { PostsDataService } from 'src/app/service/posts-data.service';
 
 @Component({
   selector: 'app-grid',
@@ -7,9 +13,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GridComponent implements OnInit {
 
-  constructor() { }
+  postsPageable: PostsPageable;
+  posts: Post[];
+  query = {
+    page: 1,
+    limit: 40
+  }
+  queryParams: SortFilter;
+
+  categories: Category[];
+
+
+  constructor(
+    private postsDataService: PostsDataService,
+    private contextService: ContextService
+  ) {
+    this.contextService.queryParamsPostsGrid$.subscribe((data: SortFilter) => this.queryParams = data);
+    this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
+   }
 
   ngOnInit(): void {
+
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+      console.log(data);
+      this.postsPageable = data;
+      this.posts = this.postsPageable.items;
+    });
+
+    this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
+
   }
+
+  categoryFilter($event: any) {
+    if(!$event) {
+      this.queryParams.filter = '';
+      this.contextService.queryParamsPosts$.next(this.queryParams);
+      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+      this.postsPageable = data;
+      this.posts = data.items;
+      })
+    } else {
+      this.queryParams.filter = this.contextService.toFilterString('categories', $event);
+      this.contextService.queryParamsPosts$.next(this.queryParams);
+      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+      this.postsPageable = data;
+      this.posts = data.items;
+      })
+    }
+  };
 
 }

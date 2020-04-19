@@ -5,6 +5,7 @@ import { Category } from 'src/app/model/category.model';
 import { PostsPageable } from 'src/app/model/pageable.model';
 import { ContextService } from 'src/app/service/context.service';
 import { SortFilter } from 'src/app/model/sort-filter.model';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-posts',
@@ -13,9 +14,11 @@ import { SortFilter } from 'src/app/model/sort-filter.model';
 })
 export class PostsComponent implements OnInit {
 
+  searchForm: FormGroup;
+
   postsPageable: PostsPageable;
   posts: Post[];
-  p: number;
+  page: number;
   total: number;
   query = {
     page: 1,
@@ -24,18 +27,26 @@ export class PostsComponent implements OnInit {
   queryParams: SortFilter;
 
   categories: Category[];
-  filteringCategory: string;
 
   constructor(
     private postsDataService: PostsDataService,
-    private contextService: ContextService) { }
+    private contextService: ContextService) {
+      this.contextService.queryParamsPosts$.subscribe((data: SortFilter) => this.queryParams = data);
+      this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
+     }
 
   ngOnInit(): void {
 
-    this.postsDataService.getPosts(this.query).subscribe((data: PostsPageable) => {
+    this.searchForm = new FormGroup({
+      'search': new FormControl(null)
+    })
+
+    //this.queryParams.filter = '';
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+      console.log(data);
       this.postsPageable = data;
       this.posts = this.postsPageable.items;
-      this.p = this.postsPageable.pagination.page;
+      this.page = this.postsPageable.pagination.page;
       this.total = this.postsPageable.pagination.total;
 
       console.log(this.postsPageable);
@@ -43,25 +54,54 @@ export class PostsComponent implements OnInit {
       console.log(this.posts);
     });
 
-    this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
-
-    this.contextService.queryParamsPosts$.subscribe((data: SortFilter) => this.queryParams = data);
-
   }
+
+  categoryFilter($event: any) {
+    if(!$event) {
+      this.queryParams.filter = '';
+      this.contextService.queryParamsPosts$.next(this.queryParams);
+      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+      this.postsPageable = data;
+      this.posts = data.items;
+      })
+    } else {
+      this.queryParams.filter = this.contextService.toFilterString('categories', $event);
+      this.contextService.queryParamsPosts$.next(this.queryParams);
+      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+      this.postsPageable = data;
+      this.posts = data.items;
+      })
+    }
+  };
+
+  onSearch() {
+    if(!this.searchForm.get('search').value) {
+      this.queryParams.filter = '';
+      this.contextService.queryParamsPosts$.next(this.queryParams);
+      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter,  this.query).subscribe((data: PostsPageable) => {
+        this.postsPageable = data;
+        this.posts = data.items;
+      })
+    } else {
+      this.queryParams.filter = this.contextService.toFilterString('title', this.searchForm.get('search').value);
+      this.contextService.queryParamsPosts$.next(this.queryParams);
+      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+        this.postsPageable = data;
+        this.posts = data.items;
+      })
+    }
+  };
 
   pageChanged($event: any) {
     this.query.page = $event.toString();
     console.log(this.query.page);
     console.log(this.query);
-    this.postsDataService.getPosts(this.query).subscribe((data: PostsPageable) => {
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       console.log(this.postsPageable.pagination);
-      this.p = this.postsPageable.pagination.page;
+      this.page = this.postsPageable.pagination.page;
       this.posts = this.postsPageable.items
     });
   };
-
-
-
 
 }

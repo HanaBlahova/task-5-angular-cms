@@ -72,6 +72,6 @@ export class EditCategoriesComponent implements OnInit {
           this.router.navigate(['/admin/categories']);
       });
     }
-  }
+  };
 
 }

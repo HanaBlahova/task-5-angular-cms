@@ -11,36 +11,29 @@ export class ContextService {
 
   categories$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>(null);
 
-  filttringCategory$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
-
   queryParamsUsers$: BehaviorSubject<SortFilter> = new BehaviorSubject<SortFilter>({
     sortBy: 'email',
     sortValue: 'desc',
-    // filterBy: 'email',
-    // filterValue: 'dixie14@seznam.cz',
     filter: ''
   });
 
   queryParamsPostsA$: BehaviorSubject<SortFilter> = new BehaviorSubject<SortFilter>({
-    sortBy: 'name',
+    sortBy: 'title',
     sortValue: 'asc',
-    // filterBy: 'email',
-    // filterValue: 'dixie14@seznam.cz',
     filter: ''
   });
 
   queryParamsPosts$: BehaviorSubject<SortFilter> = new BehaviorSubject<SortFilter>({
-    sortBy: 'name',
+    sortBy: 'title',
     sortValue: 'asc',
-    // filterBy: 'email',
-    // filterValue: 'dixie14@seznam.cz',
     filter: ''
   });
 
-  // sortByU: string = 'email';
-  // sortValueU: string = 'desc';
-  // filterByU: string = 'roles';
-  // filterValueU: string = 'ADMIN';
+  queryParamsPostsGrid$: BehaviorSubject<SortFilter> = new BehaviorSubject<SortFilter>({
+    sortBy: 'createdAt',
+    sortValue: 'desc',
+    filter: ''
+  });
 
   constructor(
     private categoriesDataService: CategoriesDataService
@@ -53,5 +46,5 @@ export class ContextService {
 
     toFilterString(filterBy: string, filterValue: string) {
       return `&filter[${filterBy}]=${filterValue}`;
-    }
+    };
 }

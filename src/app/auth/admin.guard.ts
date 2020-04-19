@@ -25,7 +25,7 @@ export class AdminGuard implements CanActivate, CanActivateChild {
       } else {
         this.router.navigate(['/']);
       }
-  }
+    }
   
   canActivateChild(
     next: ActivatedRouteSnapshot,
@@ -35,6 +35,6 @@ export class AdminGuard implements CanActivate, CanActivateChild {
       } else {
         this.router.navigate(['/']);
       }
-  }
+    }
   
 }

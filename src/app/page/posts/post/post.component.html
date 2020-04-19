@@ -5,6 +5,6 @@
     <div class="title"><a routerLink="/archive/{{post.slug}}">{{post.title}}</a></div>
     <div>{{post.perex | slice:0:48}}...</div>
     <div>
-        <span *ngFor="let category of postCategories">{{category.name}}</span>
+        <span *ngFor="let category of postCategories"> | {{category.name}} </span>
     </div>
 </div>

@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import * as JWT from 'jwt-decode';
 import { Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -69,8 +68,7 @@ export class AuthService {
       this.isLoggedIn$.next(true);
       this.verifyAdmin();
     }
-  }
-
+  };
 
   logoutUser() {
     this.user$.next(null);
@@ -78,7 +76,7 @@ export class AuthService {
     this.isAdmin$.next(false);
     this.router.navigate(['/login']);
     this.cookieService.deleteAll(); // change, it shouldn´t be deleteAll
-  }
+  };
 
   verifyAdmin() {
     this.user$.subscribe(data => this.user = data);
