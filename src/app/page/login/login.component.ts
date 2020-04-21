@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   logFormData: LoginForm = {
     email: '',
     password: ''
-  } 
+  };
 
   constructor(
     private authService: AuthService,
@@ -25,8 +25,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup ({
-      'email': new FormControl(null, [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
+      // tslint:disable-next-line:max-line-length
+      email: new FormControl(null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)])
     });
   }
 
@@ -34,8 +35,11 @@ export class LoginComponent implements OnInit {
     this.logFormData.email = this.loginForm.get('email').value;
     this.logFormData.password = this.loginForm.get('password').value;
 
-    this.authService.loginUser(this.logFormData).subscribe(res => this.router.navigate(['/archive']));
-  };
+    this.authService.loginUser(this.logFormData).subscribe(
+      res => this.router.navigate(['/archive']),
+      err => alert(err.error.message)
+    );
+  }
 
 
 

@@ -17,7 +17,7 @@ export class UsersDataService {
   queryParams: SortFilter;
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private contextService: ContextService
     ) {
 
@@ -25,23 +25,24 @@ export class UsersDataService {
       this.queryParams = data;
       console.log(this.queryParams);
       console.log(this.queryParams.filter);
-    })
+    });
    }
 
   getUsers(params?: any): Observable<UsersPageable> {
-    return this.http.get<UsersPageable>(`${this.url}/users?sort[${this.queryParams.sortBy}]=${this.queryParams.sortValue}${this.queryParams.filter}`, {params: params});
-  };
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<UsersPageable>(`${this.url}/users?sort[${this.queryParams.sortBy}]=${this.queryParams.sortValue}${this.queryParams.filter}`, {params});
+  }
 
   getAllUsers(params?: any): Observable<UsersPageable> {
-    return this.http.get<UsersPageable>(`${this.url}/users`, {params: params});
-  };
+    return this.http.get<UsersPageable>(`${this.url}/users`, {params});
+  }
 
   getUser(userId: string): Observable<User> {
     return this.http.get<User>(`${this.url}/users/${userId}`);
-  };
+  }
 
   createUser(postData: UserForm) {
     return this.http.post(`${this.url}/users`, postData, {observe: 'response'});
-  };
+  }
 
 }

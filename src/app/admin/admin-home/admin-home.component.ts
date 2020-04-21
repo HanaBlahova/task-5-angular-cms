@@ -25,21 +25,22 @@ export class AdminHomeComponent implements OnInit {
     private categoriesDataService: CategoriesDataService,
     private usersDataService: UsersDataService,
     private contextService: ContextService
-  ) { 
+  ) {
     this.contextService.queryParamsPostsA$.subscribe((data: SortFilter) => this.queryParams = data);
   }
 
   ngOnInit(): void {
-    //this.queryParams.filter = '';
+    // this.queryParams.filter = '';
+    // tslint:disable-next-line:max-line-length
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter).subscribe((data: PostsPageable) => {
       this.totalPosts = data.pagination.total;
     });
-    
+
     this.categoriesDataService.getCategories().subscribe((data: Category[]) => this.categoriesArr = data);
 
     this.usersDataService.getUsers().subscribe((data: UsersPageable) => {
       this.totalUsers = data.pagination.total;
-      console.log(data.items)
+      console.log(data.items);
     });
   }
 

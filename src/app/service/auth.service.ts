@@ -26,7 +26,7 @@ export class AuthService {
     private http: HttpClient,
     private cookieService: CookieService,
     private router: Router
-    ) { 
+    ) {
       this.loadUser();
     }
 
@@ -34,8 +34,8 @@ export class AuthService {
     return this.http.post(`${this.url}/auth/sign-up`, postData).pipe(
       map((response: any) => {
         console.log(response);
-        if(response.token) {
-          let token:any = JWT(response.token)
+        if (response.token) {
+          const token: any = JWT(response.token);
           this.user$.next(token);
           this.cookieService.set('token', response.token, null, '/');
           this.isLoggedIn$.next(true);
@@ -45,13 +45,13 @@ export class AuthService {
           alert('Register failed.');
         }
       })
-    )
-  };
+    );
+  }
 
   loginUser(postData: LoginForm) {
     return this.http.post(`${this.url}/auth/sign-in`, postData).pipe(
       map((response: any) => {
-        if(response.token) {
+        if (response.token) {
           this.user$.next(JWT(response.token));
           this.cookieService.set('token', response.token, null, '/');
           console.log(response.token);
@@ -59,16 +59,16 @@ export class AuthService {
           this.verifyAdmin();
         }
       })
-    )
-  };
+    );
+  }
 
   loadUser() {
-    if(this.cookieService.get('token')) {
+    if (this.cookieService.get('token')) {
       this.user$.next(JWT(this.cookieService.get('token')));
       this.isLoggedIn$.next(true);
       this.verifyAdmin();
     }
-  };
+  }
 
   logoutUser() {
     this.user$.next(null);
@@ -76,14 +76,14 @@ export class AuthService {
     this.isAdmin$.next(false);
     this.router.navigate(['/login']);
     this.cookieService.deleteAll(); // change, it shouldn´t be deleteAll
-  };
+  }
 
   verifyAdmin() {
     this.user$.subscribe(data => this.user = data);
-    if(this.user.roles[0] === 'ADMIN') {
+    if (this.user.roles[0] === 'ADMIN') {
     this.isAdmin$.next(true);
     }
-  };
+  }
 
 
 }

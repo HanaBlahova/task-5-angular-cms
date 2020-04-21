@@ -14,7 +14,7 @@ import { of } from 'rxjs';
 export class EditUsersComponent implements OnInit {
 
   userForm: FormGroup;
-  user:User;
+  user: User;
   newFormData: UserForm;
   updFormData: User;
   exist: boolean;
@@ -28,40 +28,40 @@ export class EditUsersComponent implements OnInit {
   ngOnInit(): void {
 
     this.userForm = new FormGroup({
-      'email': new FormControl(null, Validators.required),
-      'password': new FormControl(null)
-    })
+      email: new FormControl(null, Validators.required),
+      password: new FormControl(null)
+    });
 
     this.route.params.pipe(
       switchMap((params: Params) => {
-        if(params.id) {
+        if (params.id) {
           return this.usersDataService.getUser(params.id);
         } else {
           return of(null);
         }
       })).subscribe((data: User) => {
         this.user = data;
-          if(this.user) {
+        if (this.user) {
             this.exist = true;
             this.userForm.patchValue({
-             'email': this.user.email,
-           })
+             email: this.user.email,
+           });
         }
-      })
+      });
     }
 
   onUserSubmit() {
     this.newFormData = {
       email: this.userForm.get('email').value,
       password: this.userForm.get('password').value
-    }
+    };
     return this.usersDataService.createUser(this.newFormData).subscribe((res: any) => {
-      if(res.body.message === 'Duplicate email.') {
+      if (res.body.message === 'Duplicate email.') {
         alert('Duplicated email!');
       } else {
         this.router.navigate(['/admin/users']);
       }
     });
-  };
+  }
 
 }

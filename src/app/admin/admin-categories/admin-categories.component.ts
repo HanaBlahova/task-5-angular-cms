@@ -32,6 +32,6 @@ export class AdminCategoriesComponent implements OnInit {
         return this.categoriesDataService.getCategories();
       })
     ).subscribe((data: Category[]) => this.contextService.categories$.next(data));
-  };
+  }
 
 }

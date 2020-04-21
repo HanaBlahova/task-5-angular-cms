@@ -32,16 +32,16 @@ export class EditPostsComponent implements OnInit {
 ngOnInit(): void {
 
   this.postForm = new FormGroup({
-    'title': new FormControl(null, Validators.required),
-    'perex': new FormControl(null, Validators.required),
-    'content': new FormControl(null, Validators.required),
-    'image': new FormControl(null),
-    'categories': new FormControl(null)
+    title: new FormControl(null, Validators.required),
+    perex: new FormControl(null, Validators.required),
+    content: new FormControl(null, Validators.required),
+    image: new FormControl(null),
+    categories: new FormControl(null)
   });
 
   this.route.params.pipe(
     switchMap((params: Params) => {
-      if(params.slug) {
+      if (params.slug) {
         return this.postsDataService.getPost(params.slug);
       } else {
         return of(null);
@@ -49,54 +49,58 @@ ngOnInit(): void {
     })
   ).subscribe((data: Post) => {
     this.post = data;
-    if(this.post) {
+    if (this.post) {
       this.postForm.patchValue({
-        'title': this.post.title,
-        'perex': this.post.perex,
-        'content': this.post.content,
-        'image': this.post.img,
-        'categories': this.post.categories.map((data) => data._id)
+        title: this.post.title,
+        perex: this.post.perex,
+        content: this.post.content,
+        image: this.post.img,
+        // tslint:disable-next-line:no-shadowed-variable
+        categories: this.post.categories.map((data: any) => data._id)
       });
     }
-  })
+  });
 
-  this.contextService.categories$.subscribe((data: Category[]) => this.categories = data)
+  this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
 
 }
 
 onPostSubmit() {
   let img: string = this.postForm.get('image').value;
-  if(img === null || img === '' || img === undefined) {
-    img = 'https://9auileboys-flywheel.netdna-ssl.com/wp-content/uploads/2019/03/news.jpg'
+  if (img === null || img === '' || img === undefined) {
+    img = 'https://9auileboys-flywheel.netdna-ssl.com/wp-content/uploads/2019/03/news.jpg';
    } else if (this.post.img !== null) {
      img = this.post.img;
    } else {
+     // tslint:disable-next-line:no-unused-expression
      img;
-   };
+   }
 
   if (this.post) {
     this.updFormData = {
       title: this.postForm.get('title').value,
       perex: this.postForm.get('perex').value,
       content: this.postForm.get('content').value,
+      // tslint:disable-next-line:object-literal-shorthand
       img: img,
       _id: this.post._id,
       slug: this.post.slug,
       categories: this.postForm.get('categories').value
-    }
+    };
     console.log(this.updFormData.img);
-    return this.postsDataService.updatePost(this.post._id, this.updFormData).subscribe(responseData => this.router.navigate(['/admin/posts']));
+    return this.postsDataService.updatePost(this.post._id, this.updFormData).subscribe(() => this.router.navigate(['/admin/posts']));
   } else {
     this.newFormData = {
       title: this.postForm.get('title').value,
       perex: this.postForm.get('perex').value,
       content: this.postForm.get('content').value,
+      // tslint:disable-next-line:object-literal-shorthand
       img: img,
       categories: this.postForm.get('categories').value
-    }
+    };
     return this.postsDataService.createPost(this.newFormData).subscribe(responseData =>  this.router.navigate(['/admin/posts']));
   }
-};
+}
 
 }
 

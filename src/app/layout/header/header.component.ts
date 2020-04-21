@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-
   isLoggedIn: boolean;
   isAdmin: boolean;
   user: User;
@@ -22,18 +21,17 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+
     this.authService.isLoggedIn$.subscribe(data => {
       this.isLoggedIn = data;
     });
     this.authService.user$.subscribe(data => this.user = data);
     this.authService.isAdmin$.subscribe(data => this.isAdmin = data);
-    
+
   }
 
   onLogout() {
     this.authService.logoutUser();
-  };
-  
+  }
 
 }

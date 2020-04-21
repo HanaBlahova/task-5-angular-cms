@@ -9,6 +9,7 @@ import { Category } from 'src/app/model/category.model';
 })
 export class PostComponent implements OnInit {
 
+  // tslint:disable-next-line:no-input-rename
   @Input('post') post: Post;
   postCategories: Category[];
 
@@ -18,8 +19,6 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.postCategories = this.post.categories;
   }
-
- 
 
 
 }

@@ -23,7 +23,7 @@ export class PostsComponent implements OnInit {
   query = {
     page: 1,
     limit: 6
-  }
+  };
   queryParams: SortFilter;
 
   categories: Category[];
@@ -38,10 +38,11 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
 
     this.searchForm = new FormGroup({
-      'search': new FormControl(null)
-    })
+      search: new FormControl(null)
+    });
 
-    //this.queryParams.filter = '';
+    // this.queryParams.filter = '';
+    // tslint:disable-next-line:max-line-length
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       console.log(data);
       this.postsPageable = data;
@@ -57,51 +58,56 @@ export class PostsComponent implements OnInit {
   }
 
   categoryFilter($event: any) {
-    if(!$event) {
+    if (!$event) {
       this.queryParams.filter = '';
       this.contextService.queryParamsPosts$.next(this.queryParams);
+      // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
-      })
+      });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('categories', $event);
       this.contextService.queryParamsPosts$.next(this.queryParams);
+      // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
-      })
+      });
     }
-  };
+  }
 
   onSearch() {
-    if(!this.searchForm.get('search').value) {
+    if (!this.searchForm.get('search').value) {
       this.queryParams.filter = '';
       this.contextService.queryParamsPosts$.next(this.queryParams);
+      // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter,  this.query).subscribe((data: PostsPageable) => {
         this.postsPageable = data;
         this.posts = data.items;
-      })
+      });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('title', this.searchForm.get('search').value);
       this.contextService.queryParamsPosts$.next(this.queryParams);
+      // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
         this.postsPageable = data;
         this.posts = data.items;
-      })
+      });
     }
-  };
+  }
 
   pageChanged($event: any) {
     this.query.page = $event.toString();
     console.log(this.query.page);
     console.log(this.query);
+    // tslint:disable-next-line:max-line-length
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       console.log(this.postsPageable.pagination);
       this.page = this.postsPageable.pagination.page;
-      this.posts = this.postsPageable.items
+      this.posts = this.postsPageable.items;
     });
-  };
+  }
 
 }

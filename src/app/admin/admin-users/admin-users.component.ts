@@ -18,34 +18,34 @@ export class AdminUsersComponent implements OnInit {
 
   usersPageable: UsersPageable;
   users: User[];
-  page: number; 
+  page: number;
   total: number;
   query = {
     page: 1,
     limit: 10
-  }
+  };
   roles: string[] = ['ADMIN', 'USER'];
-  disabledBtn: boolean = true;
+  disabledBtn = true;
 
   queryParams: SortFilter;
-  
+
   constructor(
-    private usersDataService: UsersDataService, 
+    private usersDataService: UsersDataService,
     private contextService: ContextService,
   ) { }
 
   ngOnInit(): void {
 
     this.searchForm = new FormGroup({
-      'search': new FormControl(null)
-    })
+      search: new FormControl(null)
+    });
 
     this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
       this.usersPageable = data;
       console.log(this.usersPageable.pagination);
       this.page = this.usersPageable.pagination.page;
       this.total = this.usersPageable.pagination.total;
-      this.users = this.usersPageable.items
+      this.users = this.usersPageable.items;
     });
 
     this.contextService.queryParamsUsers$.subscribe((data: SortFilter) => this.queryParams = data);
@@ -53,22 +53,22 @@ export class AdminUsersComponent implements OnInit {
 
   onSearch() {
     console.log(this.searchForm.get('search').value);
-    if(!this.searchForm.get('search').value) {
+    if (!this.searchForm.get('search').value) {
       this.queryParams.filter = '';
       console.log(this.queryParams);
       this.contextService.queryParamsUsers$.next(this.queryParams);
-      this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items)
+      this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
     } else {
       this.queryParams.filter = this.contextService.toFilterString('email', this.searchForm.get('search').value);
       console.log(this.queryParams);
       this.contextService.queryParamsUsers$.next(this.queryParams);
       this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
     }
-  };
+  }
 
-  onDeleteUser(id:string) {
+  onDeleteUser(id: string) {
     // preparation for deleting users
-  };
+  }
 
   pageChanged($event: any) {
     this.query.page = $event.toString();
@@ -78,12 +78,12 @@ export class AdminUsersComponent implements OnInit {
       this.usersPageable = data;
       console.log(this.usersPageable.pagination);
       this.page = this.usersPageable.pagination.page;
-      this.users = this.usersPageable.items
+      this.users = this.usersPageable.items;
     });
-  };
+  }
 
   onChange($event: any) {
-    if($event.srcElement.value === 'Roles'  ) {
+    if ($event.srcElement.value === 'Roles'  ) {
       this.queryParams.filter = '';
       this.contextService.queryParamsUsers$.next(this.queryParams);
       this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
@@ -99,6 +99,6 @@ export class AdminUsersComponent implements OnInit {
       });
     }
     console.log($event.srcElement.value);
-  };
+  }
 
 }

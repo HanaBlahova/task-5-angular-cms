@@ -7,15 +7,15 @@ export interface Pageable {
     count: number;
     total: number;
     hasPrev: boolean;
-    hasNext: boolean
+    hasNext: boolean;
 }
 
 export interface UsersPageable {
     pagination: Pageable;
-    items: User[]
+    items: User[];
 }
 
 export interface PostsPageable {
     pagination: Pageable;
-    items: Post[]
+    items: Post[];
 }

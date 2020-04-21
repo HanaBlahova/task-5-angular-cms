@@ -25,7 +25,7 @@ export class AdminPostsComponent implements OnInit {
   query = {
     page: 1,
     limit: 6
-  }
+  };
 
   queryParams: SortFilter;
 
@@ -33,7 +33,7 @@ export class AdminPostsComponent implements OnInit {
   constructor(
     private postsDataService: PostsDataService,
     private contextService: ContextService
-    ) { 
+    ) {
       this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
       this.contextService.queryParamsPostsA$.subscribe((data: SortFilter) => this.queryParams = data);
     }
@@ -41,11 +41,12 @@ export class AdminPostsComponent implements OnInit {
   ngOnInit(): void {
 
     this.searchForm = new FormGroup({
-      'search': new FormControl(null)
-    })
+      search: new FormControl(null)
+    });
 
     // Get Posts
-    //this.queryParams.filter = '';
+    // this.queryParams.filter = '';
+    // tslint:disable-next-line:max-line-length
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
@@ -58,42 +59,46 @@ export class AdminPostsComponent implements OnInit {
   }
 
   onChange($event: any) {
-    if($event.srcElement.value === 'Categories') {
+    if ($event.srcElement.value === 'Categories') {
       this.queryParams.filter = '';
       console.log(this.queryParams);
       this.contextService.queryParamsPostsA$.next(this.queryParams);
+      // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
-      })
+      });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('categories', $event.srcElement.value);
       console.log(this.queryParams);
       this.contextService.queryParamsPostsA$.next(this.queryParams);
+      // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
-      })
+      });
     }
-  };
+  }
 
   onSearch() {
-    if(!this.searchForm.get('search').value) {
+    if (!this.searchForm.get('search').value) {
       this.queryParams.filter = '';
       this.contextService.queryParamsPostsA$.next(this.queryParams);
+      // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
         this.postsPageable = data;
         this.posts = data.items;
-      })
+      });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('title', this.searchForm.get('search').value);
       this.contextService.queryParamsPostsA$.next(this.queryParams);
+      // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
         this.postsPageable = data;
         this.posts = data.items;
-      })
+      });
     }
-  };
+  }
 
   onDeletePost(id: string) {
     this.postsDataService.deletePost(id).pipe(
@@ -105,17 +110,18 @@ export class AdminPostsComponent implements OnInit {
       this.postsPageable = data;
       this.posts = data.items;
     });
-  };
+  }
 
   pageChanged($event: any) {
     this.query.page = $event;
     console.log(this.query.page);
     console.log(this.query);
+    // tslint:disable-next-line:max-line-length
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       console.log(this.postsPageable.pagination);
       this.page = this.postsPageable.pagination.page;
-      this.posts = this.postsPageable.items
+      this.posts = this.postsPageable.items;
     });
-  };
+  }
 }

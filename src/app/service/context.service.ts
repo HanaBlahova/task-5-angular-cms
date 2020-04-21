@@ -37,7 +37,7 @@ export class ContextService {
 
   constructor(
     private categoriesDataService: CategoriesDataService
-    ) { 
+    ) {
       this.categoriesDataService.getCategories().subscribe((data: Category[]) => {
         this.categories$.next(data);
         console.log(data);
@@ -46,5 +46,5 @@ export class ContextService {
 
     toFilterString(filterBy: string, filterValue: string) {
       return `&filter[${filterBy}]=${filterValue}`;
-    };
+    }
 }

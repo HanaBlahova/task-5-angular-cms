@@ -18,7 +18,7 @@ export class GridComponent implements OnInit {
   query = {
     page: 1,
     limit: 40
-  }
+  };
   queryParams: SortFilter;
 
   categories: Category[];
@@ -34,6 +34,7 @@ export class GridComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // tslint:disable-next-line:max-line-length
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       console.log(data);
       this.postsPageable = data;
@@ -45,21 +46,23 @@ export class GridComponent implements OnInit {
   }
 
   categoryFilter($event: any) {
-    if(!$event) {
+    if (!$event) {
       this.queryParams.filter = '';
       this.contextService.queryParamsPosts$.next(this.queryParams);
+      // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
-      })
+      });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('categories', $event);
       this.contextService.queryParamsPosts$.next(this.queryParams);
+      // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
-      })
+      });
     }
-  };
+  }
 
 }
