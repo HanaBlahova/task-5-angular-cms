@@ -23,6 +23,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AlertsComponent } from './alerts/alerts/alerts.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     EditCategoriesComponent,
     EditPostsComponent,
     AdminHomeComponent,
+    AlertsComponent,
   ],
   imports: [
     BrowserModule,

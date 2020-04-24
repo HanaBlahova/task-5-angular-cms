@@ -3,6 +3,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginForm } from '../../model/form.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { throwError, interval, timer } from 'rxjs';
+import { AlertService } from 'src/app/service/alert.service';
+import { Alert } from 'src/app/model/alert.model';
+
 
 @Component({
   selector: 'app-login',
@@ -17,8 +22,10 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
+
   constructor(
     private authService: AuthService,
+    private alertService: AlertService,
     private router: Router
   ) { }
 
@@ -35,9 +42,17 @@ export class LoginComponent implements OnInit {
     this.logFormData.email = this.loginForm.get('email').value;
     this.logFormData.password = this.loginForm.get('password').value;
 
-    this.authService.loginUser(this.logFormData).subscribe(
+    this.authService.loginUser(this.logFormData).pipe(
+      catchError(
+        e => {
+          this.alertService.addAlert(new Alert(e.status, e.error.message));
+          console.log(e);
+          return throwError((e));
+        }
+      ),
+    ).subscribe(
       res => this.router.navigate(['/archive']),
-      err => alert(err.error.message)
+      // err => alert(err.error.message)
     );
   }
 

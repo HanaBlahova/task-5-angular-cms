@@ -1,0 +1,23 @@
+.alerts {
+    position: fixed;
+    right: 25px;
+    bottom: 50px
+}
+
+.alert {
+    border: 1px solid #b20000;
+    color: #b20000;
+    max-width: 300px;
+}
+
+.btn-outline-danger {
+    margin: 0px 0px 0px 10px;
+    border: 0px;
+    color: #b20000;
+}
+
+.btn-outline-danger:hover {
+    color: #ffffff;
+    background-color: #b20000;
+}
+
