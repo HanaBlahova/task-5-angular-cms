@@ -42,17 +42,8 @@ export class LoginComponent implements OnInit {
     this.logFormData.email = this.loginForm.get('email').value;
     this.logFormData.password = this.loginForm.get('password').value;
 
-    this.authService.loginUser(this.logFormData).pipe(
-      catchError(
-        e => {
-          this.alertService.addAlert(new Alert(e.status, e.error.message));
-          console.log(e);
-          return throwError((e));
-        }
-      ),
-    ).subscribe(
-      res => this.router.navigate(['/archive']),
-      // err => alert(err.error.message)
+    this.authService.loginUser(this.logFormData).subscribe(
+      res => this.router.navigate(['/']),
     );
   }
 

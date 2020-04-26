@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
 
     this.authService.registerUser(this.regFormData).subscribe((res: any) => {
       if (this.isLoggedIn) {
-        this.router.navigate(['/archive']);
+        this.router.navigate(['/']);
       }
     });
   }

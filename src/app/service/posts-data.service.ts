@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PostsPageable } from '../model/pageable.model';
 import { SortFilter } from '../model/sort-filter.model';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +19,16 @@ export class PostsDataService {
   queryParamsGrid: SortFilter;
 
   constructor(
+    private httpService: HttpService,
     private http: HttpClient
     ) { }
 
   getPosts(sortBy: string, sortValue: string, filter: string, params?: any): Observable<PostsPageable> {
-    return this.http.get<PostsPageable>(`${this.url}/posts?sort[${sortBy}]=${sortValue}${filter}`, {params});
+    return this.httpService.get<PostsPageable>(`${this.url}/posts?sort[${sortBy}]=${sortValue}${filter}`, {params});
   }
 
   getPost(slug: string): Observable<Post> {
-    return this.http.get<Post>(`${this.url}/posts/${slug}`);
+    return this.httpService.get<Post>(`${this.url}/posts/${slug}`);
   }
 
   createPost(postData: PostForm) {
@@ -34,10 +36,10 @@ export class PostsDataService {
   }
 
   updatePost(postId: string, putData: Post) {
-    return this.http.put(`${this.url}/posts/${postId}`, putData, {observe: 'response'});
+    return this.httpService.put(`${this.url}/posts/${postId}`, putData, {observe: 'response'});
   }
 
   deletePost(postId: string) {
-    return this.http.delete(`${this.url}/posts/${postId}`, {observe: 'response'});
+    return this.httpService.delete(`${this.url}/posts/${postId}`, {observe: 'response'});
   }
 }

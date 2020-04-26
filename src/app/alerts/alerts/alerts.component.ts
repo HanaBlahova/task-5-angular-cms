@@ -22,9 +22,9 @@ export class AlertsComponent implements OnInit {
 
   }
 
-  // onChange() {
-  //   console.log(this.alerts);
-  //   this.alertService.onChange();
-  // }
+  onDelete(obj: Alert) {
+    this.alertService.deleteAlert(obj);
+  }
+
 
 }

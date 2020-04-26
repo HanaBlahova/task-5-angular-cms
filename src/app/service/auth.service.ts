@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import * as JWT from 'jwt-decode';
 import { Router } from '@angular/router';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,13 +26,14 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
+    private httpService: HttpService,
     private router: Router
     ) {
       this.loadUser();
     }
 
   registerUser(postData: RegisterForm) {
-    return this.http.post(`${this.url}/auth/sign-up`, postData).pipe(
+    return this.httpService.post(`${this.url}/auth/sign-up`, postData).pipe(
       map((response: any) => {
         console.log(response);
         if (response.token) {
@@ -49,7 +51,7 @@ export class AuthService {
   }
 
   loginUser(postData: LoginForm) {
-    return this.http.post(`${this.url}/auth/sign-in`, postData).pipe(
+    return this.httpService.post(`${this.url}/auth/sign-in`, postData).pipe(
       map((response: any) => {
         if (response.token) {
           this.user$.next(JWT(response.token));

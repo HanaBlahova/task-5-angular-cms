@@ -59,7 +59,7 @@ export class AdminPostsComponent implements OnInit {
   }
 
   onChange($event: any) {
-    if ($event.srcElement.value === 'Categories') {
+    if ($event.srcElement.value === 'All categories') {
       this.queryParams.filter = '';
       console.log(this.queryParams);
       this.contextService.queryParamsPostsA$.next(this.queryParams);

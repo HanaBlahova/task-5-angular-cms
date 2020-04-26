@@ -1,5 +1,5 @@
 .header {
-    padding: 30px 15px 30px 15px;
+    padding:20px 15px;
 }
 
 .user {
@@ -8,8 +8,12 @@
 }
 
 .headline {
-    padding: 15px 15px;
+    padding: 10px 0px;
     font-weight: 700;
+}
+
+.buttons {
+    padding: 15px 15px;
     border-bottom: 1px solid #6c757d60 ;
 }
 
@@ -18,8 +22,9 @@
     margin: 0px;
 }
 
-.selected {
-    font-weight: 700;
+.roles-sel {
+    max-width: 150px;
+    padding: 6px 10px;
 }
 
 form {

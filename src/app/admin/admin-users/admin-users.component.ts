@@ -42,7 +42,6 @@ export class AdminUsersComponent implements OnInit {
 
     this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
       this.usersPageable = data;
-      console.log(this.usersPageable.pagination);
       this.page = this.usersPageable.pagination.page;
       this.total = this.usersPageable.pagination.total;
       this.users = this.usersPageable.items;
@@ -55,12 +54,10 @@ export class AdminUsersComponent implements OnInit {
     console.log(this.searchForm.get('search').value);
     if (!this.searchForm.get('search').value) {
       this.queryParams.filter = '';
-      console.log(this.queryParams);
       this.contextService.queryParamsUsers$.next(this.queryParams);
       this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
     } else {
       this.queryParams.filter = this.contextService.toFilterString('email', this.searchForm.get('search').value);
-      console.log(this.queryParams);
       this.contextService.queryParamsUsers$.next(this.queryParams);
       this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
     }
@@ -72,18 +69,15 @@ export class AdminUsersComponent implements OnInit {
 
   pageChanged($event: any) {
     this.query.page = $event.toString();
-    console.log(this.query.page);
-    console.log(this.query);
     this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
       this.usersPageable = data;
-      console.log(this.usersPageable.pagination);
       this.page = this.usersPageable.pagination.page;
       this.users = this.usersPageable.items;
     });
   }
 
   onChange($event: any) {
-    if ($event.srcElement.value === 'Roles'  ) {
+    if ($event.srcElement.value === 'All'  ) {
       this.queryParams.filter = '';
       this.contextService.queryParamsUsers$.next(this.queryParams);
       this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
