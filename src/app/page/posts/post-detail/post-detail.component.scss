@@ -3,8 +3,8 @@
 }
 
 .image {
-    width: 800px;
-    height: 500px;
+    max-width: 85%;
+    height: auto;
     padding-bottom: 15px;
 }
 
@@ -13,3 +13,25 @@
     font-weight: 600;
     padding-bottom: 15px;
 }  
+
+.perex {
+    padding-bottom: 15px;
+}
+
+.post-categories {
+    font-size: 16px;
+}
+
+.badge-secondary {
+    padding: 5px;
+    margin: 2px 2px;
+    font-weight: 400;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    /* color: #fff; */
+    /* background-color: #007bff; */
+    color: #fff !important;
+    background-color: #343a40 !important;
+    border-color: #343a40 !important;
+}

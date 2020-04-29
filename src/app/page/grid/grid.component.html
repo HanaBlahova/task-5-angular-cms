@@ -6,13 +6,13 @@
                     <ul class="nav nav-pills">
                         <li class="nav-item" >
                             <button class="btn btn-outline-dark btn-category"(click)="categoryFilter('')">
-                                <a class="nav-link" data-toggle="pill">All</a>
+                                <a class="nav-link">All</a>
                             </button>
                         </li>
                         <div *ngFor="let category of categories">
                             <li class="nav-item" >
                                 <button class="btn btn-outline-dark btn-category"(click)="categoryFilter(category._id)">
-                                    <a class="nav-link" data-toggle="pill">{{category.name}}</a>
+                                    <a class="nav-link">{{category.name}}</a>
                                 </button>
                             </li>
                         </div>

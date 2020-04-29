@@ -3,12 +3,18 @@
         <h3>Edit user</h3>
         <div class="form-group row">
             <label for="email" class="col-md-2">E-mail</label>
-            <input type="email" class="form-control col-md-10" formControlName="email" id="email" placeholder="E-mail">
+            <div class="col-md-10">
+                <input type="email" class="form-control" formControlName="email" id="email" placeholder="E-mail">
+                <span class="note" *ngIf="!userForm.get('email').valid && userForm.get('email').touched">E-mail is required.</span>
+            </div>
         </div>
 
         <div class="form-group row" *ngIf="!exist">
             <label for="password" class="col-md-2">Password</label>
-            <input type="password" class="form-control col-md-10" formControlName="password" id="password" placeholder="Password">
+            <div class="col-md-10">
+                <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password">
+                <!-- <span class="note" *ngIf="!userForm.get('password').valid && userForm.get('password').touched">Password is required.</span> -->
+            </div>
         </div>
         <div class="row">
             <div class="note2 col-md-10">

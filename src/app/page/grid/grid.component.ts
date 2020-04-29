@@ -29,6 +29,8 @@ export class GridComponent implements OnInit {
     private contextService: ContextService
   ) {
     this.contextService.queryParamsPostsGrid$.subscribe((data: SortFilter) => this.queryParams = data);
+    this.queryParams.filter = '';
+    this.contextService.queryParamsPostsGrid$.next(this.queryParams);
     this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
    }
 
@@ -48,7 +50,7 @@ export class GridComponent implements OnInit {
   categoryFilter($event: any) {
     if (!$event) {
       this.queryParams.filter = '';
-      this.contextService.queryParamsPosts$.next(this.queryParams);
+      this.contextService.queryParamsPostsGrid$.next(this.queryParams);
       // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
@@ -56,7 +58,7 @@ export class GridComponent implements OnInit {
       });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('categories', $event);
-      this.contextService.queryParamsPosts$.next(this.queryParams);
+      this.contextService.queryParamsPostsGrid$.next(this.queryParams);
       // tslint:disable-next-line:max-line-length
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;

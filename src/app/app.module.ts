@@ -8,6 +8,7 @@ import { LoginComponent } from './page/login/login.component';
 import { RegisterComponent } from './page/register/register.component';
 import { AdminComponent } from './admin/admin.component';
 import { PostComponent } from './page/posts/post/post.component';
+import { PostDetailComponent } from './page/posts/post-detail/post-detail.component';
 import { GridComponent } from './page/grid/grid.component';
 import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -45,6 +46,7 @@ import { AlertsComponent } from './alerts/alerts/alerts.component';
     EditPostsComponent,
     AdminHomeComponent,
     AlertsComponent,
+    PostDetailComponent,
   ],
   imports: [
     BrowserModule,

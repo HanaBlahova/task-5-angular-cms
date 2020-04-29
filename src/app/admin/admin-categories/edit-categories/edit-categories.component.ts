@@ -18,7 +18,8 @@ export class EditCategoriesComponent implements OnInit {
 
   category: Category;
   newFormData: CategoryForm = {
-    name: ''
+    name: '',
+    slug: ''
   };
   updFormData: Category = {
     name: '',
@@ -28,7 +29,6 @@ export class EditCategoriesComponent implements OnInit {
 
   constructor(
     private categoriesDataService: CategoriesDataService,
-    private contextService: ContextService,
     private route: ActivatedRoute,
     private router: Router
     ) { }
@@ -36,7 +36,8 @@ export class EditCategoriesComponent implements OnInit {
   ngOnInit(): void {
 
     this.categoryForm = new FormGroup({
-      name: new FormControl(null, Validators.required)
+      name: new FormControl(null, Validators.required),
+      slug: new FormControl(null, Validators.required)
     });
 
 
@@ -51,7 +52,8 @@ export class EditCategoriesComponent implements OnInit {
       this.category = data;
       if (this.category) {
         this.categoryForm.patchValue({
-          name: this.category.name
+          name: this.category.name,
+          slug: this.category.slug
         });
       }
     });
@@ -62,12 +64,13 @@ export class EditCategoriesComponent implements OnInit {
       this.updFormData = {
         name: this.categoryForm.get('name').value,
         _id: this.category._id,
-        slug: this.category.slug
+        slug: this.categoryForm.get('slug').value
       };
       // tslint:disable-next-line:max-line-length
       return this.categoriesDataService.updateCategory(this.category._id, this.updFormData).subscribe(() => this.router.navigate(['/admin/categories']));
       } else {
         this.newFormData.name = this.categoryForm.get('name').value;
+        this.newFormData.slug = this.categoryForm.get('slug').value;
         return this.categoriesDataService.createCategory(this.newFormData).subscribe((res: any) => {
           this.router.navigate(['/admin/categories']);
       });

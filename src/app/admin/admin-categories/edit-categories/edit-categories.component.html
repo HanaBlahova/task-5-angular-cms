@@ -3,7 +3,17 @@
         <h3>Create category</h3>
         <div class="form-group row">
             <label for="name" class="col-md-2">Name</label>
-            <input type="text" class="form-control col-md-10" formControlName="name" id="title" placeholder="Name of category">
+            <div class="col-md-10">
+                <input type="text" class="form-control" formControlName="name" id="name" placeholder="Name of category">
+                <span class="note" *ngIf="!categoryForm.get('name').valid && categoryForm.get('name').touched">Name is required.</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="slug" class="col-md-2">Slug</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" formControlName="slug" id="slug" placeholder="Slug of category">
+                <span class="note" *ngIf="!categoryForm.get('slug').valid && categoryForm.get('slug').touched">Slug is required.</span>
+            </div>
         </div>
         <div class="row">
             <div class="note2 col-md-10">

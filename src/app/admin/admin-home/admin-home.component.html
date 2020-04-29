@@ -1,21 +1,21 @@
 <div class="container">
-    <div class="dashboard row">
+    <div class="dashboard row card-columns">
         <div class="col-md-4">
-            <div class="statistics">
+            <div class="statistics card bg-secondary">
                 <div>POSTS</div>
                 <div class="loading" *ngIf="totalPosts === undefined"></div>
                 <div *ngIf="totalPosts !== undefined">{{totalPosts}}</div>
             </div>
        </div>
-       <div class="col-md-4">
-           <div class="statistics">
+       <div class="col-md-4 ">
+           <div class="statistics card bg-secondary">
                 <div>CATEGORIES</div>
                 <div class="loading" *ngIf="categoriesArr === undefined"></div>
                 <div *ngIf="categoriesArr !== undefined">{{categoriesArr.length}}</div>
            </div>
       </div>
       <div class="col-md-4">
-          <div class="statistics">
+          <div class="statistics card bg-secondary">
             <div>USERS</div>
             <div class="loading" *ngIf="totalUsers === undefined"></div>
             <div *ngIf="totalUsers !== undefined">{{totalUsers}}</div>

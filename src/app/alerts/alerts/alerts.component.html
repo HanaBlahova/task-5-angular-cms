@@ -1,5 +1,6 @@
 <div class="alerts">
     <div *ngFor="let alert of alerts" class="alert alert-danger" role="alert">
+        <span class="icon fas fa-exclamation-triangle"></span>
         <span>Error: {{ alert.title }} - {{ alert.message }}</span>
         <button class="btn btn-outline-danger alert alert-danger" (click)="onDelete(alert)">x</button>
     </div>

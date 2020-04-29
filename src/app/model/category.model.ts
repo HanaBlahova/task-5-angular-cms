@@ -1,5 +1,6 @@
 export interface CategoryForm {
     name: string;
+    slug: string;
 }
 
 export interface Category {

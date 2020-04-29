@@ -32,6 +32,8 @@ export class PostsComponent implements OnInit {
     private postsDataService: PostsDataService,
     private contextService: ContextService) {
       this.contextService.queryParamsPosts$.subscribe((data: SortFilter) => this.queryParams = data);
+      this.queryParams.filter = '';
+      this.contextService.queryParamsPosts$.next(this.queryParams);
       this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
      }
 
@@ -41,7 +43,6 @@ export class PostsComponent implements OnInit {
       search: new FormControl(null)
     });
 
-    // this.queryParams.filter = '';
     // tslint:disable-next-line:max-line-length
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       console.log(data);
@@ -49,6 +50,7 @@ export class PostsComponent implements OnInit {
       this.posts = this.postsPageable.items;
       this.page = this.postsPageable.pagination.page;
       this.total = this.postsPageable.pagination.total;
+
 
       console.log(this.postsPageable);
       console.log(this.posts.length, +this.query.limit);

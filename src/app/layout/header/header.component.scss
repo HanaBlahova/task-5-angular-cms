@@ -2,9 +2,8 @@
     display: block;
 }
 
-button {
-    display: inline-block;
-    margin-right: 10px;
+.button {
+
 }
 
 .flex {
@@ -14,4 +13,14 @@ button {
 .align {
     flex: 1;
     text-align: right;
+}
+
+button {
+    margin-left: 5px;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
 }

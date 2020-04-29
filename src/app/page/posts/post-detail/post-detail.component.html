@@ -3,8 +3,9 @@
         <img src="{{post2?.img}}" class="image" alt="" placeholder="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png">
     </div>
     <div class="title">{{post2?.title}}</div>
-    <div>{{post2?.content}}</div>
+    <div class="perex">{{post2?.content}}</div>
     <div>
-        <span *ngFor="let category of postCategories">{{category.name}}</span>
+        <span *ngFor="let category of postCategories" class="badge badge-secondary"> {{category.name}} </span>
     </div>
+
 </div>

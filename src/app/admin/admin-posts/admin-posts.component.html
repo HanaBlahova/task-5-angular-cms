@@ -66,8 +66,8 @@
             </div>
             <div class="col-md-8">
                 <div class="title">{{ post.title }}</div>
-                <div class="perex">{{ post.perex | slice:0:100 }}... </div>
-                <div><span *ngFor="let category of post.categories"> | {{ category.name }} </span></div>
+                <div class="perex">{{ post.perex }} </div>
+                <div><span *ngFor="let category of post.categories" class="badge badge-secondary">{{ category.name }} </span></div>
             </div>
             <div class="col-md-1">
                 <button class="btn btn-primary" routerLink="/admin/posts/edit/{{post.slug}}">Upd</button>
