@@ -1,5 +1,5 @@
-<div class="">
-    <div>
+<div class="post">
+    <div class="post__image">
         <img src="{{post.img}}" class="image" alt="" placeholder="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png">
     </div>
     <div *ngIf="post.title.length <= 44, else sliceTitle" class="title"><a routerLink="/archive/{{post.slug}}">{{post.title}}</a></div>

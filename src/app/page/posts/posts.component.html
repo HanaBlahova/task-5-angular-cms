@@ -44,6 +44,7 @@
             </div>
         </div>
     </div> -->
+    <app-loading *ngIf="isLoading"></app-loading>
     <div *ngIf="postsPageable !== undefined">
         <div class="posts">
             <app-post 

@@ -25,6 +25,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AlertsComponent } from './alerts/alerts/alerts.component';
+import { LoadingComponent } from './shared/loading/loading.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { AlertsComponent } from './alerts/alerts/alerts.component';
     AdminHomeComponent,
     AlertsComponent,
     PostDetailComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

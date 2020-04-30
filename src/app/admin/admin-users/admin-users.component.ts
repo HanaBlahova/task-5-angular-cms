@@ -56,10 +56,12 @@ export class AdminUsersComponent implements OnInit {
       this.queryParams.filter = '';
       this.contextService.queryParamsUsers$.next(this.queryParams);
       this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
+      this.pageChanged(1);
     } else {
       this.queryParams.filter = this.contextService.toFilterString('email', this.searchForm.get('search').value);
       this.contextService.queryParamsUsers$.next(this.queryParams);
       this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => this.users = data.items);
+      this.pageChanged(1);
     }
   }
 
@@ -83,6 +85,7 @@ export class AdminUsersComponent implements OnInit {
       this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
         this.usersPageable = data;
         this.users = data.items;
+        this.pageChanged(1);
       });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('roles', $event.srcElement.value);
@@ -90,6 +93,7 @@ export class AdminUsersComponent implements OnInit {
       this.usersDataService.getUsers(this.query).subscribe((data: UsersPageable) => {
         this.usersPageable = data;
         this.users = data.items;
+        this.pageChanged(1);
       });
     }
     console.log($event.srcElement.value);

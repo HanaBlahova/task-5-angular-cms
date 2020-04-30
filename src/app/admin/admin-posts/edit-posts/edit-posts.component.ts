@@ -50,14 +50,23 @@ ngOnInit(): void {
   ).subscribe((data: Post) => {
     this.post = data;
     if (this.post) {
-      this.postForm.patchValue({
-        title: this.post.title,
-        perex: this.post.perex,
-        content: this.post.content,
-        image: this.post.img,
-        // tslint:disable-next-line:no-shadowed-variable
-        categories: this.post.categories.map((data: any) => data._id)
-      });
+      if (this.post.categories) {
+        this.postForm.patchValue({
+          title: this.post.title,
+          perex: this.post.perex,
+          content: this.post.content,
+          image: this.post.img,
+          // tslint:disable-next-line:no-shadowed-variable
+          categories: this.post.categories.map((data: any) => data._id)
+        });
+      } else {
+        this.postForm.patchValue({
+          title: this.post.title,
+          perex: this.post.perex,
+          content: this.post.content,
+          image: this.post.img,
+        });
+      }
     }
   });
 
@@ -67,14 +76,11 @@ ngOnInit(): void {
 
 onPostSubmit() {
   let img: string = this.postForm.get('image').value;
-  if (img === null || img === '' || img === undefined) {
+  console.log(img);
+  if (img === undefined || img === null || img === '') {
     img = 'https://9auileboys-flywheel.netdna-ssl.com/wp-content/uploads/2019/03/news.jpg';
-   } else if (this.post.img !== null) {
-     img = this.post.img;
-   } else {
-     // tslint:disable-next-line:no-unused-expression
-     img;
-   }
+  }
+  console.log(img);
 
   if (this.post) {
     this.updFormData = {

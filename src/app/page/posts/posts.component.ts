@@ -28,6 +28,8 @@ export class PostsComponent implements OnInit {
 
   categories: Category[];
 
+  isLoading = true;
+
   constructor(
     private postsDataService: PostsDataService,
     private contextService: ContextService) {
@@ -50,6 +52,7 @@ export class PostsComponent implements OnInit {
       this.posts = this.postsPageable.items;
       this.page = this.postsPageable.pagination.page;
       this.total = this.postsPageable.pagination.total;
+      // this.isLoading = false;
 
 
       console.log(this.postsPageable);
@@ -60,6 +63,7 @@ export class PostsComponent implements OnInit {
   }
 
   categoryFilter($event: any) {
+    this.isLoading = true;
     if (!$event) {
       this.queryParams.filter = '';
       this.contextService.queryParamsPosts$.next(this.queryParams);
@@ -67,6 +71,8 @@ export class PostsComponent implements OnInit {
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
+      this.pageChanged(1);
+      // this.isLoading = false;
       });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('categories', $event);
@@ -75,6 +81,8 @@ export class PostsComponent implements OnInit {
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
+      this.pageChanged(1);
+      // this.isLoading = false;
       });
     }
   }
@@ -87,6 +95,7 @@ export class PostsComponent implements OnInit {
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter,  this.query).subscribe((data: PostsPageable) => {
         this.postsPageable = data;
         this.posts = data.items;
+        this.pageChanged(1);
       });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('title', this.searchForm.get('search').value);
@@ -95,6 +104,7 @@ export class PostsComponent implements OnInit {
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
         this.postsPageable = data;
         this.posts = data.items;
+        this.pageChanged(1);
       });
     }
   }

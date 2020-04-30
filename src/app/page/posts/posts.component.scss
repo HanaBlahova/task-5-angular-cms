@@ -8,6 +8,7 @@
 .post {
     padding: 20px 10px;
     width: calc(100%/3);
+    @media all and (max-width: 767px) {width: 100%;}
 }
 
 .pagination {

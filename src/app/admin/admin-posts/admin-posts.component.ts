@@ -67,6 +67,7 @@ export class AdminPostsComponent implements OnInit {
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
+      this.pageChanged(1);
       });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('categories', $event.srcElement.value);
@@ -76,6 +77,7 @@ export class AdminPostsComponent implements OnInit {
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
+      this.pageChanged(1);
       });
     }
   }
@@ -88,6 +90,7 @@ export class AdminPostsComponent implements OnInit {
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
         this.postsPageable = data;
         this.posts = data.items;
+        this.pageChanged(1);
       });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('title', this.searchForm.get('search').value);
@@ -96,6 +99,7 @@ export class AdminPostsComponent implements OnInit {
       this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
         this.postsPageable = data;
         this.posts = data.items;
+        this.pageChanged(1);
       });
     }
   }
