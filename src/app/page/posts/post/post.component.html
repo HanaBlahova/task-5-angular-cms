@@ -1,6 +1,6 @@
 <div class="post">
     <div class="post__image">
-        <img src="{{post.img}}" class="image" alt="" placeholder="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png">
+        <img appLazyLoading src="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png" [attr.data-src]="post.img" class="image" alt="">
     </div>
     <div *ngIf="post.title.length <= 44, else sliceTitle" class="title"><a routerLink="/archive/{{post.slug}}">{{post.title}}</a></div>
     <ng-template #sliceTitle><div class="title"><a routerLink="/archive/{{post.slug}}">{{post.title | slice:0:41}}...</a></div></ng-template>

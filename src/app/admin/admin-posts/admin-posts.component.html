@@ -52,8 +52,8 @@
                 </div>
             </form>
         </div> -->
-
     </div>
+    <app-loading *ngIf="isLoading"></app-loading>
     <div *ngIf="postsPageable !== undefined">
         <div class="post row" 
         *ngFor="let post of posts | paginate: { 
@@ -62,7 +62,7 @@
             totalItems: postsPageable.pagination.total
             }" >
             <div class="col-md-2">
-                <img src="{{ post.img }}" class="image" alt="" placeholder="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png">
+                <img  appLazyLoading src="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png" [attr.data-src]="post.img" class="image" alt="">
             </div>
             <div class="col-md-8">
                 <div class="title">{{ post.title }}</div>

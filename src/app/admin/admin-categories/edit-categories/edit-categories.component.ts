@@ -5,7 +5,6 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Category, CategoryForm } from 'src/app/model/category.model';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ContextService } from 'src/app/service/context.service';
 
 @Component({
   selector: 'app-edit-categories',
@@ -27,6 +26,7 @@ export class EditCategoriesComponent implements OnInit {
     slug: ''
   };
 
+
   constructor(
     private categoriesDataService: CategoriesDataService,
     private route: ActivatedRoute,
@@ -40,15 +40,15 @@ export class EditCategoriesComponent implements OnInit {
       slug: new FormControl(null, Validators.required)
     });
 
-
     this.route.params.pipe(
       switchMap((params: Params) => {
-      if (params.id) {
-        return this.categoriesDataService.getCategory(params.id);
-      } else {
-        return of(null);
-      }
-    })).subscribe((data: Category) => {
+        if (params.id) {
+          return this.categoriesDataService.getCategory(params.id);
+        } else {
+          return of(null);
+        }
+      })
+  ).subscribe((data: Category) => {
       this.category = data;
       if (this.category) {
         this.categoryForm.patchValue({
@@ -67,7 +67,9 @@ export class EditCategoriesComponent implements OnInit {
         slug: this.categoryForm.get('slug').value
       };
       // tslint:disable-next-line:max-line-length
-      return this.categoriesDataService.updateCategory(this.category._id, this.updFormData).subscribe(() => this.router.navigate(['/admin/categories']));
+      return this.categoriesDataService.updateCategory(this.category._id, this.updFormData).subscribe(() => {
+        this.router.navigate(['/admin/categories']);
+      });
       } else {
         this.newFormData.name = this.categoryForm.get('name').value;
         this.newFormData.slug = this.categoryForm.get('slug').value;

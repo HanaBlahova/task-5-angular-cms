@@ -24,6 +24,7 @@
     <div class="container">
         <h2>Last posts</h2>
     </div>
+    <app-loading *ngIf="isLoading"></app-loading>
     <div *ngIf="postsPageable !== undefined">
         <div class="posts">
             <app-post class="post" *ngFor="let post of posts" [post]="post">

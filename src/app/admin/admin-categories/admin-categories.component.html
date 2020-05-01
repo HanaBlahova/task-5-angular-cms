@@ -7,6 +7,7 @@
             <button class="btn btn-success" routerLink="/admin/categories/create">New Category</button>
         </div>
     </div>
+    <app-loading *ngIf="isLoading"></app-loading>
     <div class="category row" *ngFor="let category of categories">
          <div class="col-md-10">
               <div class="name">{{category.name}}</div>

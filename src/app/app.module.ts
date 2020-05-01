@@ -26,6 +26,7 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AlertsComponent } from './alerts/alerts/alerts.component';
 import { LoadingComponent } from './shared/loading/loading.component';
+import { LazyLoadingDirective } from './shared/directives/lazy-loading.directive';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { LoadingComponent } from './shared/loading/loading.component';
     AlertsComponent,
     PostDetailComponent,
     LoadingComponent,
+    LazyLoadingDirective,
   ],
   imports: [
     BrowserModule,

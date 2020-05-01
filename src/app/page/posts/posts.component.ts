@@ -6,6 +6,8 @@ import { PostsPageable } from 'src/app/model/pageable.model';
 import { ContextService } from 'src/app/service/context.service';
 import { SortFilter } from 'src/app/model/sort-filter.model';
 import { FormGroup, FormControl } from '@angular/forms';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-posts',
@@ -25,10 +27,8 @@ export class PostsComponent implements OnInit {
     limit: 6
   };
   queryParams: SortFilter;
-
   categories: Category[];
-
-  isLoading = true;
+  isLoading = false;
 
   constructor(
     private postsDataService: PostsDataService,
@@ -45,19 +45,19 @@ export class PostsComponent implements OnInit {
       search: new FormControl(null)
     });
 
-    // tslint:disable-next-line:max-line-length
-    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+    this.isLoading = true;
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).pipe(
+      catchError((e: any) => {
+          this.isLoading = false;
+          return throwError((e));
+        })
+    ).subscribe((data: PostsPageable) => {
       console.log(data);
       this.postsPageable = data;
       this.posts = this.postsPageable.items;
       this.page = this.postsPageable.pagination.page;
       this.total = this.postsPageable.pagination.total;
-      // this.isLoading = false;
-
-
-      console.log(this.postsPageable);
-      console.log(this.posts.length, +this.query.limit);
-      console.log(this.posts);
+      this.isLoading = false;
     });
 
   }
@@ -66,59 +66,60 @@ export class PostsComponent implements OnInit {
     this.isLoading = true;
     if (!$event) {
       this.queryParams.filter = '';
-      this.contextService.queryParamsPosts$.next(this.queryParams);
-      // tslint:disable-next-line:max-line-length
-      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
-      this.postsPageable = data;
-      this.posts = data.items;
-      this.pageChanged(1);
-      // this.isLoading = false;
-      });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('categories', $event);
-      this.contextService.queryParamsPosts$.next(this.queryParams);
-      // tslint:disable-next-line:max-line-length
-      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+    }
+    this.contextService.queryParamsPosts$.next(this.queryParams);
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).pipe(
+        catchError((e: any) => {
+            this.isLoading = false;
+            return throwError((e));
+          })
+      ).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       this.posts = data.items;
       this.pageChanged(1);
-      // this.isLoading = false;
+      this.isLoading = false;
       });
-    }
   }
 
   onSearch() {
+    this.isLoading = true;
     if (!this.searchForm.get('search').value) {
       this.queryParams.filter = '';
-      this.contextService.queryParamsPosts$.next(this.queryParams);
-      // tslint:disable-next-line:max-line-length
-      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter,  this.query).subscribe((data: PostsPageable) => {
-        this.postsPageable = data;
-        this.posts = data.items;
-        this.pageChanged(1);
-      });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('title', this.searchForm.get('search').value);
-      this.contextService.queryParamsPosts$.next(this.queryParams);
-      // tslint:disable-next-line:max-line-length
-      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
-        this.postsPageable = data;
-        this.posts = data.items;
-        this.pageChanged(1);
-      });
     }
+    this.contextService.queryParamsPosts$.next(this.queryParams);
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).pipe(
+      catchError((e: any) => {
+          this.isLoading = false;
+          return throwError((e));
+        })
+    ).subscribe((data: PostsPageable) => {
+      this.postsPageable = data;
+      this.posts = data.items;
+      this.pageChanged(1);
+      this.isLoading = false;
+    });
   }
 
   pageChanged($event: any) {
+    this.isLoading = true;
     this.query.page = $event.toString();
     console.log(this.query.page);
     console.log(this.query);
-    // tslint:disable-next-line:max-line-length
-    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).pipe(
+      catchError((e: any) => {
+          this.isLoading = false;
+          return throwError((e));
+        })
+    ).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
       console.log(this.postsPageable.pagination);
       this.page = this.postsPageable.pagination.page;
       this.posts = this.postsPageable.items;
+      this.isLoading = false;
     });
   }
 

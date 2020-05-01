@@ -5,6 +5,8 @@ import { PostsPageable } from 'src/app/model/pageable.model';
 import { Post } from 'src/app/model/post.model';
 import { SortFilter } from 'src/app/model/sort-filter.model';
 import { PostsDataService } from 'src/app/service/posts-data.service';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-grid',
@@ -22,6 +24,8 @@ export class GridComponent implements OnInit {
   queryParams: SortFilter;
 
   categories: Category[];
+  isLoading = false;
+
 
 
   constructor(
@@ -36,11 +40,17 @@ export class GridComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // tslint:disable-next-line:max-line-length
-    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
+    this.isLoading = true;
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).pipe(
+      catchError((e: any) => {
+          this.isLoading = false;
+          return throwError((e));
+        })
+    ).subscribe((data: PostsPageable) => {
       console.log(data);
       this.postsPageable = data;
       this.posts = this.postsPageable.items;
+      this.isLoading = false;
     });
 
     this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
@@ -48,23 +58,23 @@ export class GridComponent implements OnInit {
   }
 
   categoryFilter($event: any) {
+    this.isLoading = true;
     if (!$event) {
       this.queryParams.filter = '';
-      this.contextService.queryParamsPostsGrid$.next(this.queryParams);
-      // tslint:disable-next-line:max-line-length
-      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
-      this.postsPageable = data;
-      this.posts = data.items;
-      });
     } else {
       this.queryParams.filter = this.contextService.toFilterString('categories', $event);
-      this.contextService.queryParamsPostsGrid$.next(this.queryParams);
-      // tslint:disable-next-line:max-line-length
-      this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).subscribe((data: PostsPageable) => {
-      this.postsPageable = data;
-      this.posts = data.items;
-      });
     }
+    this.contextService.queryParamsPostsGrid$.next(this.queryParams);
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).pipe(
+      catchError((e: any) => {
+          this.isLoading = false;
+          return throwError((e));
+        })
+    ).subscribe((data: PostsPageable) => {
+    this.postsPageable = data;
+    this.posts = data.items;
+    this.isLoading = false;
+    });
   }
 
 }

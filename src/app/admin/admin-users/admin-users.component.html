@@ -45,7 +45,8 @@
             </select>
         </div>
     </div>
-     
+
+    <app-loading *ngIf="isLoading"></app-loading>
     <div *ngIf="usersPageable !== undefined">
         <div 
         class="user row" 
