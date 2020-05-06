@@ -5,13 +5,13 @@
                 <nav class="navbar navbar-expand-md">
                     <ul class="nav nav-pills">
                         <li class="nav-item" >
-                            <button class="btn btn-outline-dark btn-category"(click)="categoryFilter('')">
+                            <button class="btn btn-outline-dark categories-menu__btn"(click)="categoryFilter('')">
                                 <a class="nav-link">All</a>
                             </button>
                         </li>
                         <div *ngFor="let category of categories">
                             <li class="nav-item" >
-                                <button class="btn btn-outline-dark btn-category"(click)="categoryFilter(category._id)">
+                                <button class="btn btn-outline-dark categories-menu__btn"(click)="categoryFilter(category._id)">
                                     <a class="nav-link">{{category.name}}</a>
                                 </button>
                             </li>
@@ -26,8 +26,8 @@
     </div>
     <app-loading *ngIf="isLoading"></app-loading>
     <div *ngIf="postsPageable !== undefined">
-        <div class="posts">
-            <app-post class="post" *ngFor="let post of posts" [post]="post">
+        <div class="grid-posts">
+            <app-post class="grid-post" *ngFor="let post of posts" [post]="post">
             </app-post>
         </div>
     </div>

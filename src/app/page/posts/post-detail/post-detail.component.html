@@ -1,10 +1,10 @@
 <app-loading *ngIf="isLoading"></app-loading>
 <div class="container post-detail">
     <div>
-        <img appLazyLoading src="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png" [attr.data-src]="post2.img" class="image" alt="">
+        <img appLazyLoading src="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png" [attr.data-src]="post2.img" class="post-detail__image" alt="">
     </div>
-    <div class="title">{{post2?.title}}</div>
-    <div class="perex">{{post2?.content}}</div>
+    <div class="post-detail__title">{{post2?.title}}</div>
+    <div class="post-detail__perex">{{post2?.content}}</div>
     <div>
         <span *ngFor="let category of postCategories" class="badge badge-secondary"> {{category.name}} </span>
     </div>

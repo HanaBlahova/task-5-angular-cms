@@ -1,83 +1,68 @@
-    .header {
-        padding: 20px 15px;
-    }
+.header {
+    padding: 20px 15px;
+}
 
-    .post {
-        padding: 15px;
-        border-bottom: 1px solid #6c757d60 ;
-    }
+.btn-success {
+    width: 140px;
+    margin: 0px;
+    margin-bottom: 20px;
+}
 
-
-        .image {
-            width: 160px;
-            height: 100px;
-        }
-
-        .title {
-            font-weight: 600;
-            padding-bottom: 5px;
-        }   
-        
-        a {
-            color: #212529; 
-        }
-        
-            a:hover {
-                color: #6c757d;
-            }
-
-        .perex {
-            max-width: 700px;
-        }
-
-.headline {
+.filter {
     padding: 15px 15px;
     font-weight: 700;
-    border-bottom: 1px solid #6c757d60 ;
-}
+    border-bottom: 1px solid #6c757d60;
 
-.cat-sel {
-    max-width: 150px;
-    padding: 6px 10px
-}
-
-form {
-     max-width: 150px;
-     //padding: 6px 0px !important;
+    &__category {
+        max-width: 150px;
+        padding: 6px 10px;
     }
 
-    .fa-search {
-        color: #ced4da;
+    form {
+        max-width: 150px;
     }
-            
-    .fa-search:hover {
+}
+
+.btn-default {
+    margin: 0px;
+    padding: 6px 10px;
+    border: 1px solid #ced4da;
+}
+
+.fa-search {
+    color: #ced4da;
+
+    &:hover {
         color: #000000;
     }
-            
-    .btn-default {
-        margin: 0px;
-        padding: 6px 10px;
-        border: 1px solid #ced4da;
-    }
-
-    .btn-success {
-        width: 140px;
-        margin: 0px;
-        margin-bottom: 20px;
-    }
-
-    .pagination {
-        display: block;
-        text-align: right;
-        padding: 40px 0px;
-    }
-
-.perex {
-    padding-bottom: 15px;
 }
 
-.post-categories {
-    font-size: 16px;
+.post {
+    padding: 15px;
+    border-bottom: 1px solid #6c757d60;
+
+    &__image {
+        width: 160px;
+        height: 100px;
+    }
+
+    &__title {
+        font-weight: 600;
+        padding-bottom: 5px;
+
+        a {
+            color: #212529;
+        
+            &:hover {
+                color: #6c757d;
+            }
+        }
+    }
+
+    &__perex {
+        max-width: 700px;
+        padding-bottom: 15px;
+    }
 }
 
 .badge-secondary {
@@ -85,4 +70,13 @@ form {
     margin: 2px 2px;
     font-weight: 400;
 }
+
+.pagination {
+    display: block;
+    text-align: right;
+    padding: 40px 0px;
+}
+
+
+
 

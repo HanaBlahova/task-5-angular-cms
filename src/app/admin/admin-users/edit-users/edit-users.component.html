@@ -1,4 +1,4 @@
-<div class="entityForm">
+<div class="entity-form">
     <form [formGroup]="userForm" (ngSubmit)="onUserSubmit()">
         <h3>Edit user</h3>
         <div class="form-group row">
@@ -13,10 +13,9 @@
             <label for="password" class="col-md-2">Password</label>
             <div class="col-md-10">
                 <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password">
-                <!-- <span class="note" *ngIf="!userForm.get('password').valid && userForm.get('password').touched">Password is required.</span> -->
             </div>
         </div>
-        <div class="row">
+        <div class="form-group row">
             <div class="note2 col-md-10">
                 <span *ngIf="!userForm.valid && userForm.touched">Invalid form!</span>
             </div>

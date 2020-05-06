@@ -1,43 +1,40 @@
+.categories-menu {
+    padding: 20px 20px;
+
+    &__btn {
+        padding: 0px;
+        margin: 0px;
+        border: 0px;
+    }
+}
+
+.navbar {
+    padding: 20px;
+}
+
+a {
+    color: #212529;
+
+    &:hover {
+        color: #ffffff;
+    }
+}
+
 h2 {
     padding: 15px 30px;
 }
 
-.posts {
+.grid-posts {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     padding: 20px;
 }
 
-.post {
+.grid-post {
     padding: 20px 15px;
-    width: calc(100%/3);
-}
-
-.pagination {
-    display: block;
-    text-align: right;
-    padding: 40px 0px;
-}
-
-.categories-menu {
-    padding: 20px 20px;
-}
-
-    a {
-        color: #212529; 
+    width: calc(100% / 3);
+    @media all and (max-width: 767px) {
+        width: 100%;
     }
-
-        a:hover {
-            color: #ffffff;
-        }
-
-        .btn-category {
-            padding: 0px;
-            margin: 0px;
-            border: 0px
-        }
-
-        .navbar {
-            padding: 20px;
-        }
+}

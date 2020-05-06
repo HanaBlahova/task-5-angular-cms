@@ -28,7 +28,8 @@ export class EditUsersComponent implements OnInit {
   ngOnInit(): void {
 
     this.userForm = new FormGroup({
-      email: new FormControl(null, Validators.required),
+      // tslint:disable-next-line:max-line-length
+      email: new FormControl(null, [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]),
       password: new FormControl(null)
     });
 

@@ -45,7 +45,6 @@ export class AdminPostsComponent implements OnInit {
       search: new FormControl(null)
     });
 
-
     this.isLoading = true;
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter).pipe(
       catchError((e: any) => {
@@ -61,7 +60,6 @@ export class AdminPostsComponent implements OnInit {
       console.log(this.postsPageable);
       this.isLoading = false;
     });
-
   }
 
   onChange($event: any) {
@@ -108,21 +106,23 @@ export class AdminPostsComponent implements OnInit {
   }
 
   onDeletePost(id: string) {
-    this.isLoading = true;
-    this.postsDataService.deletePost(id).pipe(
-      switchMap((res: any) => {
-        console.log(res);
-        return this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter);
-      }),
-      catchError((e: any) => {
+    if (confirm('Are you sure you want to delete this post?')) {
+      this.isLoading = true;
+      this.postsDataService.deletePost(id).pipe(
+        switchMap((res: any) => {
+          console.log(res);
+          return this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter);
+        }),
+        catchError((e: any) => {
+          this.isLoading = false;
+          return throwError((e));
+        })
+      ).subscribe((data: PostsPageable) => {
+        this.postsPageable = data;
+        this.posts = data.items;
         this.isLoading = false;
-        return throwError((e));
-      })
-    ).subscribe((data: PostsPageable) => {
-      this.postsPageable = data;
-      this.posts = data.items;
-      this.isLoading = false;
-    });
+      });
+    }
   }
 
   pageChanged($event: any) {

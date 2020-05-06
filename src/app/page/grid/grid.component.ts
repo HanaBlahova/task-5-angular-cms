@@ -22,10 +22,8 @@ export class GridComponent implements OnInit {
     limit: 40
   };
   queryParams: SortFilter;
-
   categories: Category[];
   isLoading = false;
-
 
 
   constructor(
@@ -54,7 +52,6 @@ export class GridComponent implements OnInit {
     });
 
     this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
-
   }
 
   categoryFilter($event: any) {

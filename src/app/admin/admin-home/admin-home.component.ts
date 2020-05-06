@@ -30,9 +30,8 @@ export class AdminHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.queryParams.filter = '';
-    // tslint:disable-next-line:max-line-length
-    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter).subscribe((data: PostsPageable) => {
+    this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter)
+    .subscribe((data: PostsPageable) => {
       this.totalPosts = data.pagination.total;
     });
 

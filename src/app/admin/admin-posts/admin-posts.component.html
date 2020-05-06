@@ -1,20 +1,15 @@
 <div class="container">
-    <div class="row header">
+    <div class="header row">
         <div class="col-md-10">
             <h3>List of posts</h3>
         </div>
         <div class="col-md-2">
             <button class="btn btn-success" routerLink="/admin/posts/create">New Post</button>
         </div>
-        <!-- <div class="col-md-2">
-            <button class="btn btn-success" routerLink="/admin/posts/create">New Post</button>
-        </div> -->
     </div>
-    <div class="row headline">
-        <!-- <div class="col-md-2">Picture</div>
-        <div class="col-md-8">Name</div> -->
+    <div class="filter row">
         <div class="form-group col-md-2">
-            <select class="form-control cat-sel" id="roles" (change)="onChange($event)">
+            <select class="form-control filter__category" (change)="onChange($event)">
                 <option selected >All categories</option>
                 <option *ngFor="let category of categories" value="{{category._id}}" >{{category.name}}</option>
             </select>
@@ -22,7 +17,7 @@
         <div class="col-md-2">
             <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
                 <div class="input-group">
-                  <input type="text" class="form-control search" formControlName="search" placeholder="Search">
+                  <input type="text" class="form-control" formControlName="search" placeholder="Search">
                   <div class="input-group-btn">
                     <button class="btn btn-default" type="submit">
                       <i class="fas fa-search"></i>
@@ -31,27 +26,6 @@
                 </div>
             </form>
         </div>
-        <!-- <div class="col-md-2">
-            <button class="btn btn-success" routerLink="/admin/posts/create">New Post</button>
-        </div> -->
-        <!-- <div class="form-group col-md-2">
-            <select class="form-control selected" id="roles" (change)="onChange($event)">
-                <option selected >Categories</option>
-                <option *ngFor="let category of categories" value="{{category._id}}" >{{category.name}}</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-                <div class="input-group">
-                  <input type="text" class="form-control search" formControlName="search" placeholder="Search">
-                  <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                </div>
-            </form>
-        </div> -->
     </div>
     <app-loading *ngIf="isLoading"></app-loading>
     <div *ngIf="postsPageable !== undefined">
@@ -62,11 +36,11 @@
             totalItems: postsPageable.pagination.total
             }" >
             <div class="col-md-2">
-                <img  appLazyLoading src="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png" [attr.data-src]="post.img" class="image" alt="">
+                <img  appLazyLoading src="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png" [attr.data-src]="post.img" class="post__image" alt="">
             </div>
             <div class="col-md-8">
-                <div class="title">{{ post.title }}</div>
-                <div class="perex">{{ post.perex }} </div>
+                <div class="post__title"><a routerLink="/archive/{{post.slug}}">{{ post.title }}</a></div>
+                <div class="post__perex">{{ post.perex }} </div>
                 <div><span *ngFor="let category of post.categories" class="badge badge-secondary">{{ category.name }} </span></div>
             </div>
             <div class="col-md-1">

@@ -1,25 +1,26 @@
 .alerts {
     position: fixed;
     right: 25px;
-    bottom: 50px
+    bottom: 50px;
+
+    &__icon {
+        padding-right: 5px;
+    }
 }
 
 .btn-outline-danger {
     margin: 0px 0px 0px 10px;
     padding: 0px 5px;
     border: 0px;
+
+    &:hover {
+        color: #ffffff;
+        background-color: #721c24;;
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
 }
 
-.btn-outline-danger:hover {
-    color: #ffffff;
-    background-color: #721c24;;
-}
-
-.btn-outline-danger:focus {
-    box-shadow: none;
-}
-
-.icon {
-    padding-right: 5px;
-}
 

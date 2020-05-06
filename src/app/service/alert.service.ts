@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Alert } from '../model/alert.model';
 
 @Injectable({
@@ -12,7 +12,6 @@ export class AlertService {
 
   constructor() {
     this.alerts$.subscribe((data: Alert[]) => this.alerts = data);
-
   }
 
   addAlert(error: Alert) {
@@ -31,6 +30,5 @@ export class AlertService {
       this.alerts = this.alerts.filter((_, index) => index !== i);
       this.alerts$.next(this.alerts);
     }
-
 
 }

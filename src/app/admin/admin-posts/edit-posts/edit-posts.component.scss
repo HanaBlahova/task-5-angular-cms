@@ -1,21 +1,15 @@
-.entityForm {
+.entity-form {
     margin: 0px auto;
     padding: 30px;
     max-width: 800px;
-}
 
-
-    .entityForm h3 {
+    h3 {
         margin-bottom: 20px;
     }
 
-    .entityForm label {
+    label {
         font-weight: 600;
     }
-
-.note {
-    font-size: 12px;
-    color: #b20000;
 }
 
 .note2 {
@@ -27,12 +21,7 @@
 
 .btn {
     margin: 5px auto;
+    padding: 5px;
 }
 
-    .xbtn {
-        padding: 0px 5px;
-        margin-left: 5px;
-        text-align: center;
-
-    }
 

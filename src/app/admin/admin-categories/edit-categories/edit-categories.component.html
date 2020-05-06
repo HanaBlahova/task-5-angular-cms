@@ -1,4 +1,4 @@
-<div class="entityForm">
+<div class="entity-form">
     <form [formGroup]="categoryForm" (ngSubmit)="onCategorySubmit()">
         <h3>Create category</h3>
         <div class="form-group row">
@@ -15,7 +15,7 @@
                 <span class="note" *ngIf="!categoryForm.get('slug').valid && categoryForm.get('slug').touched">Slug is required.</span>
             </div>
         </div>
-        <div class="row">
+        <div class="form-group row">
             <div class="note2 col-md-10">
                 <span *ngIf="!categoryForm.valid && categoryForm.touched">Invalid form!</span>
             </div>

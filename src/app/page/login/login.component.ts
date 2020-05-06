@@ -3,10 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginForm } from '../../model/form.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { throwError, interval, timer } from 'rxjs';
 import { AlertService } from 'src/app/service/alert.service';
-import { Alert } from 'src/app/model/alert.model';
 
 
 @Component({
@@ -46,7 +43,5 @@ export class LoginComponent implements OnInit {
       res => this.router.navigate(['/']),
     );
   }
-
-
 
 }

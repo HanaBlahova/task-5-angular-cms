@@ -3,8 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterForm } from '../../model/form.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +16,6 @@ export class RegisterComponent implements OnInit {
     email: '',
     password: ''
   };
-
   isLoggedIn: boolean;
 
   constructor(
@@ -46,6 +43,5 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-
 
 }

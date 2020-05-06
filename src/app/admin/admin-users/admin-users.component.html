@@ -1,32 +1,16 @@
 <div class="container">
-    <div class="row header">
+    <div class="header row">
         <div class="col-md-10">
             <h3>List of users</h3>
         </div>
-        <!-- <div class="col-md-3">
-            <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-                <div class="input-group">
-                  <input type="text" class="form-control search" formControlName="search" placeholder="Search">
-                  <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                </div>
-            </form>
-        </div> -->
         <div class="col-md-2">
             <button class="btn btn-success" routerLink="/admin/users/create">New User</button>
         </div>
     </div>
-    <!-- <div class="headline row ">
-        <div class="col-md-7">E-mail</div>
-        <div class="col-md-5">Roles</div>
-    </div> -->
-    <div class="buttons form-group row">
+    <div class="filter form-group row">
         <div class="col-md-7">
             <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-                <label for="search" class="headline">E-mail</label>
+                <label for="search" class="filter__label">E-mail</label>
                 <div class="input-group">
                     <input type="text" class="form-control" formControlName="search" id="search" placeholder="Search">
                     <div class="input-group-btn">
@@ -38,8 +22,8 @@
             </form>
         </div>
         <div class="form-group col-md-5">
-            <label for="roles" class="headline">Roles</label>
-            <select class="form-control col-md-6 roles-sel" id="roles" (change)="onChange($event)">
+            <label for="roles" class="filter__label">Roles</label>
+            <select class="form-control col-md-6 filter__roles" id="roles" (change)="onChange($event)">
                 <option selected >All</option>
                 <option *ngFor="let role of roles" value="{{role}}" >{{role}}</option>
             </select>
@@ -56,10 +40,10 @@
             totalItems: usersPageable.pagination.total
             }">
             <div class="col-md-7">
-                <div class="email">{{user.email}}</div>
+                <div>{{user.email}}</div>
             </div>
             <div class="col-md-3">
-                <div class="role">{{user.roles}}</div>
+                <div>{{user.roles}}</div>
             </div>
             <div class="col-md-1">
                 <button class="btn btn-primary" [disabled]="disabledBtn" routerLink="/admin/users/edit/{{user._id}}">Upd</button>

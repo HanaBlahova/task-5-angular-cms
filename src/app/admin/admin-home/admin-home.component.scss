@@ -9,31 +9,28 @@
     text-align: center;
     font-weight: 300;
     color: #ffffff;
+
+    &__box {
+        max-width: 170px;
+        padding: 25px 5px;
+    }
 }
 
-    .statistics {
-        max-width: 170px;
-        padding: 15px 5px;
-    }
+.loading:after {
+    content: ".";
+    animation: dots 2s linear infinite;
+}
 
-    .statistics div {
-        padding: 5px;
+@keyframes dots {
+    0%,
+    30% {
+        content: ".";
     }
-
-    .loading:after {
-        content: '.';
-        animation: dots 2s linear infinite;
+    60% {
+        content: "..";
     }
-
-    @keyframes dots {
-        0%, 30% {
-            content: '.'
-        }
-        60% {
-            content: '..'
-        }
-        90%, 100% {
-            content: '...'
-        }
-
+    90%,
+    100% {
+        content: "...";
     }
+}

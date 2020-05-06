@@ -2,10 +2,10 @@
     padding: 20px 0px;
 }
 
-    a {
-        color: #212529; 
-    }
+a {
+    color: #212529;
 
-        a:hover {
-            color: #6c757d;
-        }
+    &:hover {
+        color: #6c757d;
+    }
+}

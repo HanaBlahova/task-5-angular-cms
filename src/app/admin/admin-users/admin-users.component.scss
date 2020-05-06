@@ -2,42 +2,29 @@
     padding:20px 15px;
 }
 
-.user {
-    padding: 5px 15px;
-    border-bottom: 1px solid #6c757d60 ;
-}
-
-.headline {
-    padding: 10px 0px;
-    font-weight: 700;
-}
-
-.buttons {
-    padding: 15px 15px;
-    border-bottom: 1px solid #6c757d60 ;
-}
-
 .btn-success {
     width: 140px;
     margin: 0px;
 }
 
-.roles-sel {
-    max-width: 150px;
-    padding: 6px 10px;
-}
+.filter {
+    padding: 15px 15px;
+    border-bottom: 1px solid #6c757d60 ;
 
-form {
-    max-width: 150px;
-    padding: 6px 0px !important;
-}
+    form {
+        max-width: 150px;
+        padding: 6px 0px !important;
+    }
 
-.fa-search {
-    color: #ced4da;
-}
+    &__label {
+        padding: 10px 0px;
+        font-weight: 700;
+    }
 
-.fa-search:hover {
-    color: #000000;
+    &__roles {
+        max-width: 150px;
+        padding: 6px 10px;
+    }
 }
 
 .btn-default {
@@ -46,6 +33,18 @@ form {
     border: 1px solid #ced4da;
 }
 
+.fa-search {
+    color: #ced4da;
+
+    &:hover {
+        color: #000000;
+    }
+}
+
+.user {
+    padding: 5px 15px;
+    border-bottom: 1px solid #6c757d60 ;
+}
 
 .pagination {
     display: block;

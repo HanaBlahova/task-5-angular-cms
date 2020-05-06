@@ -2,17 +2,18 @@
     display: block;
 }
 
-.button {
-
+.nav-item {
+    display: flex;
+    align-items: center;
 }
 
 .flex {
     display: flex;
-}
 
-.align {
-    flex: 1;
-    text-align: right;
+    &__align {
+        flex: 1;
+        text-align: right;
+    }
 }
 
 button {
@@ -25,7 +26,3 @@ button {
     padding: 3px;
 }
 
-.nav-item {
-    display: flex;
-    align-items: center;
-}

@@ -1,12 +1,12 @@
 <div class="post">
-    <div class="post__image">
-        <img appLazyLoading src="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png" [attr.data-src]="post.img" class="image" alt="">
+    <div class="post-image">
+        <img appLazyLoading src="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png" [attr.data-src]="post.img" class="post-image__img" alt="">
     </div>
-    <div *ngIf="post.title.length <= 44, else sliceTitle" class="title"><a routerLink="/archive/{{post.slug}}">{{post.title}}</a></div>
-    <ng-template #sliceTitle><div class="title"><a routerLink="/archive/{{post.slug}}">{{post.title | slice:0:41}}...</a></div></ng-template>
-    <div *ngIf="post.perex.length <= 85, else slicePerex" class="perex">{{post.perex}}</div>
-    <ng-template #slicePerex><div class="perex">{{post.perex | slice:0:82}}...</div></ng-template>
-    <div class="post-categories">
+    <div *ngIf="post.title.length <= 44, else sliceTitle" class="post__title"><a routerLink="/archive/{{post.slug}}">{{post.title}}</a></div>
+    <ng-template #sliceTitle><div class="post__title"><a routerLink="/archive/{{post.slug}}">{{post.title | slice:0:41}}...</a></div></ng-template>
+    <div *ngIf="post.perex.length <= 85, else slicePerex" class="post__perex">{{post.perex}}</div>
+    <ng-template #slicePerex><div class="post__perex">{{post.perex | slice:0:82}}...</div></ng-template>
+    <div class="post__categories">
         <span *ngFor="let category of postCategories" class="badge badge-secondary"> {{category.name}} </span>
     </div>
 </div>

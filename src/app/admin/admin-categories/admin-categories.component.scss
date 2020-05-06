@@ -1,23 +1,21 @@
 .header {
     padding: 20px 15px;
+
+    &__button {
+        padding: 15px;
+    }
 }
 
 .category {
     padding: 5px 15px;
-    border-bottom: 1px solid #6c757d60 ;
-}
+    border-bottom: 1px solid #6c757d60;
 
-    .name {
+    &__name {
         font-size: 18px;
         font-weight: 600;
     }
+}
 
-
-    .col-md-2 {
-        padding: 15px;
-    }
-
-    .btn-success {
-        width: 140px;
-    }
-
+.btn-success {
+    width: 140px;
+}

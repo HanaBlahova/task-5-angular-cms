@@ -26,5 +26,4 @@ export class AlertsComponent implements OnInit {
     this.alertService.deleteAlert(obj);
   }
 
-
 }

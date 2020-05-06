@@ -71,7 +71,6 @@ ngOnInit(): void {
   });
 
   this.contextService.categories$.subscribe((data: Category[]) => this.categories = data);
-
 }
 
 onPostSubmit() {

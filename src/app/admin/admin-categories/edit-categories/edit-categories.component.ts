@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriesDataService } from 'src/app/service/categories-data.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -37,7 +37,7 @@ export class EditCategoriesComponent implements OnInit {
 
     this.categoryForm = new FormGroup({
       name: new FormControl(null, Validators.required),
-      slug: new FormControl(null, Validators.required)
+      slug: new FormControl(null)
     });
 
     this.route.params.pipe(
@@ -66,7 +66,6 @@ export class EditCategoriesComponent implements OnInit {
         _id: this.category._id,
         slug: this.categoryForm.get('slug').value
       };
-      // tslint:disable-next-line:max-line-length
       return this.categoriesDataService.updateCategory(this.category._id, this.updFormData).subscribe(() => {
         this.router.navigate(['/admin/categories']);
       });

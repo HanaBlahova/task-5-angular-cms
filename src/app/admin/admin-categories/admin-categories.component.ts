@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriesDataService } from 'src/app/service/categories-data.service';
 import { Category } from 'src/app/model/category.model';
 import { switchMap, catchError } from 'rxjs/operators';
@@ -40,20 +40,22 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   onDeleteCategory(id: string) {
-    this.isLoading = true;
-    this.categoriesDataService.deleteCategory(id).pipe(
-      switchMap((res: any) => {
-        console.log(res);
-        return this.categoriesDataService.getCategories();
-      }),
-      catchError((e: any) => {
-          this.isLoading = false;
-          return throwError((e));
-      })
-    ).subscribe((data: Category[]) => {
-      this.contextService.categories$.next(data);
-      this.isLoading = false;
-    });
+    if (confirm('Are you sure you want to delete this category?')) {
+      this.isLoading = true;
+      this.categoriesDataService.deleteCategory(id).pipe(
+        switchMap((res: any) => {
+          console.log(res);
+          return this.categoriesDataService.getCategories();
+        }),
+        catchError((e: any) => {
+            this.isLoading = false;
+            return throwError((e));
+        })
+      ).subscribe((data: Category[]) => {
+        this.contextService.categories$.next(data);
+        this.isLoading = false;
+      });
+    }
   }
 
 }

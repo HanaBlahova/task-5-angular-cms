@@ -1,25 +1,21 @@
 .post-detail {
     padding: 30px;
-}
 
-.image {
-    max-width: 85%;
-    height: auto;
-    padding-bottom: 15px;
-}
+    &__image {
+        max-width: 85%;
+        height: auto;
+        padding-bottom: 15px;
+    }
 
-.title {
-    font-size: 24px;
-    font-weight: 600;
-    padding-bottom: 15px;
-}  
+    &__title {
+        font-size: 24px;
+        font-weight: 600;
+        padding-bottom: 15px;
+    } 
 
-.perex {
-    padding-bottom: 15px;
-}
-
-.post-categories {
-    font-size: 16px;
+    &__perex {
+        padding-bottom: 15px;
+    }
 }
 
 .badge-secondary {
@@ -29,8 +25,6 @@
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    /* color: #fff; */
-    /* background-color: #007bff; */
     color: #fff !important;
     background-color: #343a40 !important;
     border-color: #343a40 !important;

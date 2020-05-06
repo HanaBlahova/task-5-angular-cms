@@ -1,16 +1,16 @@
 <div class="container">
-    <div class="row header">
+    <div class="header row">
         <div class="col-md-10">
             <h3>List of categories</h3>
         </div>
-        <div class="col-md-2">
+        <div class="header__button col-md-2">
             <button class="btn btn-success" routerLink="/admin/categories/create">New Category</button>
         </div>
     </div>
     <app-loading *ngIf="isLoading"></app-loading>
     <div class="category row" *ngFor="let category of categories">
          <div class="col-md-10">
-              <div class="name">{{category.name}}</div>
+              <div class="category__name">{{category.name}}</div>
         </div>
          <div class="col-md-1">
              <button class="btn btn-primary" routerLink="/admin/categories/edit/{{category._id}}">Upd</button>
@@ -20,3 +20,5 @@
         </div>    
     </div>
 </div>
+
+
