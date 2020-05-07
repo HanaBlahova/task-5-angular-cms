@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private alertService: AlertService,
     private router: Router
   ) { }
 

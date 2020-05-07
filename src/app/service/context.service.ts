@@ -40,7 +40,6 @@ export class ContextService {
     ) {
       this.categoriesDataService.getCategories().subscribe((data: Category[]) => {
         this.categories$.next(data);
-        console.log(data);
       });
     }
 

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User, UserForm } from '../model/user.model';
 import { UsersPageable } from '../model/pageable.model';
@@ -18,7 +17,6 @@ export class UsersDataService {
   queryParams: SortFilter;
 
   constructor(
-    private http: HttpClient,
     private contextService: ContextService,
     private httpService: HttpService,
 
@@ -26,8 +24,6 @@ export class UsersDataService {
 
     this.contextService.queryParamsUsers$.subscribe((data: SortFilter) => {
       this.queryParams = data;
-      console.log(this.queryParams);
-      console.log(this.queryParams.filter);
     });
    }
 

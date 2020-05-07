@@ -52,7 +52,6 @@ export class PostsComponent implements OnInit {
           return throwError((e));
         })
     ).subscribe((data: PostsPageable) => {
-      console.log(data);
       this.postsPageable = data;
       this.posts = this.postsPageable.items;
       this.page = this.postsPageable.pagination.page;
@@ -107,8 +106,6 @@ export class PostsComponent implements OnInit {
   pageChanged($event: any) {
     this.isLoading = true;
     this.query.page = $event.toString();
-    console.log(this.query.page);
-    console.log(this.query);
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).pipe(
       catchError((e: any) => {
           this.isLoading = false;
@@ -116,7 +113,6 @@ export class PostsComponent implements OnInit {
         })
     ).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
-      console.log(this.postsPageable.pagination);
       this.page = this.postsPageable.pagination.page;
       this.posts = this.postsPageable.items;
       this.isLoading = false;

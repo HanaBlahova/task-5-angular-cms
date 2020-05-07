@@ -44,7 +44,6 @@ export class AdminCategoriesComponent implements OnInit {
       this.isLoading = true;
       this.categoriesDataService.deleteCategory(id).pipe(
         switchMap((res: any) => {
-          console.log(res);
           return this.categoriesDataService.getCategories();
         }),
         catchError((e: any) => {

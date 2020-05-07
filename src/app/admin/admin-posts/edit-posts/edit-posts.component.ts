@@ -75,11 +75,9 @@ ngOnInit(): void {
 
 onPostSubmit() {
   let img: string = this.postForm.get('image').value;
-  console.log(img);
   if (img === undefined || img === null || img === '') {
     img = 'https://9auileboys-flywheel.netdna-ssl.com/wp-content/uploads/2019/03/news.jpg';
   }
-  console.log(img);
 
   if (this.post) {
     this.updFormData = {
@@ -92,7 +90,6 @@ onPostSubmit() {
       slug: this.post.slug,
       categories: this.postForm.get('categories').value
     };
-    console.log(this.updFormData.img);
     return this.postsDataService.updatePost(this.post._id, this.updFormData).subscribe(() => this.router.navigate(['/admin/posts']));
   } else {
     this.newFormData = {

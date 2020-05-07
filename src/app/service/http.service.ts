@@ -20,10 +20,8 @@ export class HttpService {
 
   get<T>(url: string, params?: any): Observable<T> {
     return this.http.get<T>(url, params).pipe(
-      catchError<HttpEvent<T>, Observable<any>>(
-        (e: any) => {
+      catchError<HttpEvent<T>, Observable<any>>((e: any) => {
           this.alertService.addAlert(new Alert(e.status, e.error.message));
-          console.log(e);
           return throwError((e));
         }
       ),
@@ -32,10 +30,8 @@ export class HttpService {
 
   post(url: string, data: any, other?: any) {
     return this.http.post(url, data, other).pipe(
-      catchError(
-        e => {
+      catchError((e: any) => {
           this.alertService.addAlert(new Alert(e.status, e.error.message));
-          console.log(e);
           return throwError((e));
         }
       ),
@@ -44,10 +40,8 @@ export class HttpService {
 
   put(url: string, data: any, other?: any) {
     return this.http.put(url, data, other).pipe(
-      catchError(
-        e => {
+      catchError((e: any) => {
           this.alertService.addAlert(new Alert(e.status, e.error.message));
-          console.log(e);
           return throwError((e));
         }
       ),
@@ -56,10 +50,8 @@ export class HttpService {
 
   delete(url: string, other?: any) {
     return this.http.delete(url, other).pipe(
-      catchError(
-        e => {
+      catchError((e: any) => {
           this.alertService.addAlert(new Alert(e.status, e.error.message));
-          console.log(e);
           return throwError((e));
         }
       ),

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category, CategoryForm } from '../model/category.model';
 import { HttpService } from './http.service';
@@ -13,7 +12,6 @@ export class CategoriesDataService {
   url = environment.api.url;
 
   constructor(
-    private http: HttpClient,
     private httpService: HttpService,
     ) { }
 

@@ -56,8 +56,6 @@ export class AdminPostsComponent implements OnInit {
       this.posts = data.items;
       this.page = this.postsPageable.pagination.page;
       this.total = this.postsPageable.pagination.total;
-      console.log(this.posts);
-      console.log(this.postsPageable);
       this.isLoading = false;
     });
   }
@@ -69,7 +67,6 @@ export class AdminPostsComponent implements OnInit {
     } else {
       this.queryParams.filter = this.contextService.toFilterString('categories', $event.srcElement.value);
     }
-    console.log(this.queryParams);
     this.contextService.queryParamsPostsA$.next(this.queryParams);
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).pipe(
       catchError((e: any) => {
@@ -110,7 +107,6 @@ export class AdminPostsComponent implements OnInit {
       this.isLoading = true;
       this.postsDataService.deletePost(id).pipe(
         switchMap((res: any) => {
-          console.log(res);
           return this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter);
         }),
         catchError((e: any) => {
@@ -128,8 +124,6 @@ export class AdminPostsComponent implements OnInit {
   pageChanged($event: any) {
     this.isLoading = true;
     this.query.page = $event;
-    console.log(this.query.page);
-    console.log(this.query);
     this.postsDataService.getPosts(this.queryParams.sortBy, this.queryParams.sortValue, this.queryParams.filter, this.query).pipe(
       catchError((e: any) => {
           this.isLoading = false;
@@ -137,7 +131,6 @@ export class AdminPostsComponent implements OnInit {
         }
     )).subscribe((data: PostsPageable) => {
       this.postsPageable = data;
-      console.log(this.postsPageable.pagination);
       this.page = this.postsPageable.pagination.page;
       this.posts = this.postsPageable.items;
       this.isLoading = false;

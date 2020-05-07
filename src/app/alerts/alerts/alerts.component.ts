@@ -18,7 +18,6 @@ export class AlertsComponent implements OnInit {
   ngOnInit(): void {
 
     this.alertService.alerts$.subscribe((data: Alert[]) => this.alerts = data);
-    console.log(this.alerts);
 
   }
 

@@ -39,7 +39,6 @@ export class AdminHomeComponent implements OnInit {
 
     this.usersDataService.getUsers().subscribe((data: UsersPageable) => {
       this.totalUsers = data.pagination.total;
-      console.log(data.items);
     });
   }
 

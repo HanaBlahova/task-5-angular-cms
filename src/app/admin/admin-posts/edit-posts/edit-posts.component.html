@@ -7,7 +7,6 @@
                 <input type="text" class="form-control" formControlName="title" id="title" placeholder="Title">
                 <span class="note" *ngIf="!postForm.get('title').valid && postForm.get('title').touched">Title is required.</span>
             </div>
-
         </div>
         <div class="form-group row">
             <label for="perex" class="col-md-2">Perex</label>
@@ -22,7 +21,6 @@
                 <textarea type="text" class="form-control" formControlName="content" id="content" placeholder="Content"></textarea>
                 <span class="note" *ngIf="!postForm.get('content').valid && postForm.get('content').touched">Content is required.</span>
             </div>
-
         </div>
         <div class="form-group row">
             <label for="image" class="col-md-2">Image URL</label>
@@ -44,6 +42,5 @@
             </div>
             <button type="submit" class="btn btn-success col-md-2" [disabled]="!postForm.valid">Save Post</button>
         </div>
-        
     </form>
 </div>

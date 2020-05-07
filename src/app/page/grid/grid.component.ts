@@ -45,7 +45,6 @@ export class GridComponent implements OnInit {
           return throwError((e));
         })
     ).subscribe((data: PostsPageable) => {
-      console.log(data);
       this.postsPageable = data;
       this.posts = this.postsPageable.items;
       this.isLoading = false;

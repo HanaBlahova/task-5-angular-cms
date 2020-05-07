@@ -33,7 +33,6 @@ export class AuthService {
   registerUser(postData: RegisterForm) {
     return this.httpService.post(`${this.url}/auth/sign-up`, postData).pipe(
       map((response: any) => {
-        console.log(response);
         if (response.token) {
           const token: any = JWT(response.token);
           this.user$.next(token);
@@ -54,7 +53,6 @@ export class AuthService {
         if (response.token) {
           this.user$.next(JWT(response.token));
           this.cookieService.set('token', response.token, null, '/');
-          console.log(response.token);
           this.isLoggedIn$.next(true);
           this.verifyAdmin();
         }
@@ -75,7 +73,7 @@ export class AuthService {
     this.isLoggedIn$.next(false);
     this.isAdmin$.next(false);
     this.router.navigate(['/login']);
-    this.cookieService.deleteAll(); // change, it shouldn´t be deleteAll
+    this.cookieService.delete('token');
   }
 
   verifyAdmin() {
