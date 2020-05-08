@@ -14,7 +14,7 @@ export class LazyLoadingDirective implements OnInit {
 
   ngOnInit(): void {
     const dataSrc = this.el.nativeElement.getAttribute('data-src');
-    timer(1000).subscribe( _ => this.src = dataSrc);
+    timer(500).subscribe( _ => this.src = dataSrc);
   }
 
   @HostListener('error')

@@ -36,7 +36,7 @@
             totalItems: postsPageable.pagination.total
             }" >
             <div class="col-md-2">
-                <img  appLazyLoading src="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png" [attr.data-src]="post.img" class="post__image" alt="">
+                <img  src="https://www.cheopstech.cz/wp-content/uploads/2017/06/placeholder-1.png" data-src="{{ post.img }}" class="post__image" alt="">
             </div>
             <div class="col-md-8">
                 <div class="post__title"><a routerLink="/archive/{{post.slug}}">{{ post.title }}</a></div>
